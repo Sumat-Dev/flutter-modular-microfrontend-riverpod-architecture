@@ -7,8 +7,16 @@ packages:
 
 command:
   bootstrap:
-    # Use pub workspace resolution; melos runs `flutter pub get` at the root.
-    runPubGetInParallel: true
+    # This repo uses Dart pub workspaces (root `pubspec.yaml` has `workspace:`
+    # and each package sets `resolution: workspace`). In that model a single
+    # `flutter pub get` at the root resolves every member package, so classic
+    # per-package melos bootstrap is neither needed nor compatible.
+    #
+    # Preferred command:  fvm flutter pub get   (run at the repo root)
+    #
+    # The hook below makes `melos bootstrap` do the right thing anyway.
+    hooks:
+      pre: flutter pub get
 
 scripts:
   analyze:

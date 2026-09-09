@@ -59,4 +59,5 @@ jobs:
         uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture
           fail_ci_if_error: false
