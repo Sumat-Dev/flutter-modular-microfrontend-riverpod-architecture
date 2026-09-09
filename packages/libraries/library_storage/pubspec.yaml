@@ -9,8 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  library_core:
-    path: ../library_core
+  library_core: any
 
 dev_dependencies:
   test: ^1.25.8

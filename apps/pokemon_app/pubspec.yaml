@@ -19,19 +19,14 @@ dependencies:
   # State management + DI
   flutter_riverpod: ^2.6.1
 
-  # Workspace libraries
-  library_core:
-    path: ../../packages/libraries/library_core
-  library_network:
-    path: ../../packages/libraries/library_network
-  library_storage:
-    path: ../../packages/libraries/library_storage
-  library_ui_components:
-    path: ../../packages/libraries/library_ui_components
+  # Workspace libraries (resolved by name via the pub workspace)
+  library_core: any
+  library_network: any
+  library_storage: any
+  library_ui_components: any
 
-  # Feature microfrontends
-  feature_pokemon:
-    path: ../../packages/features/pokemon
+  # Feature microfrontends (resolved by name via the pub workspace)
+  feature_pokemon: any
 
 dev_dependencies:
   flutter_test:
