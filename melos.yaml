@@ -1,0 +1,28 @@
+name: pokemon_flutter
+
+packages:
+  - apps/**
+  - packages/features/**
+  - packages/libraries/**
+
+command:
+  bootstrap:
+    # Use pub workspace resolution; melos runs `flutter pub get` at the root.
+    runPubGetInParallel: true
+
+scripts:
+  analyze:
+    description: Run `flutter analyze` in all packages.
+    run: dart run melos exec -- flutter analyze
+  format:
+    description: Verify formatting across all packages.
+    run: dart run melos exec -- dart format --output=none --set-exit-if-changed .
+  format:fix:
+    description: Apply Dart formatting across all packages.
+    run: dart run melos exec -- dart format .
+  test:
+    description: Run tests in every package that has a test/ directory.
+    run: dart run melos exec --dir-exists=test -- flutter test
+  test:coverage:
+    description: Run tests with coverage in every testable package.
+    run: dart run melos exec --dir-exists=test -- flutter test --coverage
