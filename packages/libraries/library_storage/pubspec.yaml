@@ -1,0 +1,17 @@
+name: library_storage
+description: "Local cache abstraction and a default in-memory implementation."
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  library_core:
+    path: ../library_core
+
+dev_dependencies:
+  test: ^1.25.8
+  lints: ^5.1.1

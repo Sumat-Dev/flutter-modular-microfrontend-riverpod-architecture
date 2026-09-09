@@ -23,13 +23,13 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
+      - name: Resolve workspace dependencies
         run: flutter pub get
 
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
-      - name: Analyze project source
+      - name: Analyze workspace
         run: flutter analyze
 
   test:
@@ -49,15 +49,14 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
+      - name: Resolve workspace dependencies
         run: flutter pub get
 
-      - name: Run tests with coverage
-        run: flutter test --coverage
+      - name: Run package tests with coverage
+        run: dart run melos run test:coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
-          files: coverage/lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
