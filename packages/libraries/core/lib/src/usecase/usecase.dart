@@ -1,4 +1,4 @@
-import '../utils/typedefs.dart';
+import 'package:core/src/utils/typedefs.dart';
 
 /// Generic use case contract. [Params] is the input; use [NoParams] when a use
 /// case takes no arguments. Use cases live in the DOMAIN layer.

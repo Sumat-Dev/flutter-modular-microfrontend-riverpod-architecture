@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 
-import 'key_value_store.dart';
+import 'package:storage/src/key_value_store.dart';
 
 /// Default in-memory [KeyValueStore]. Suitable for the golden feature and
 /// tests; can be swapped for a persistent backend without touching features.

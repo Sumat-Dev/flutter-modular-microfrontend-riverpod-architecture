@@ -1,10 +1,9 @@
 import 'package:core/core.dart';
-
-import '../../domain/entities/pokemon.dart';
-import '../../domain/entities/pokemon_detail.dart';
-import '../../domain/repositories/pokemon_repository.dart';
-import '../datasources/pokemon_local_data_source.dart';
-import '../datasources/pokemon_remote_data_source.dart';
+import 'package:feature_pokemon/src/data/datasources/pokemon_local_data_source.dart';
+import 'package:feature_pokemon/src/data/datasources/pokemon_remote_data_source.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
 /// Implements [PokemonRepository]. Applies the cache strategy from plan §11
 /// (cache hit → entity; miss → remote → save → entity) and maps data-layer

@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
+import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../domain/entities/pokemon.dart';
-import 'pokemon_providers.dart';
 
 /// Immutable UI state for the paginated Pokemon list.
 class PokemonListState {

@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 
-import '../entities/pokemon.dart';
-import '../repositories/pokemon_repository.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
 /// Fetches a page of Pokemon.
 class GetPokemonList

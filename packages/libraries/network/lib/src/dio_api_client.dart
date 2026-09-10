@@ -1,8 +1,8 @@
 import 'package:core/core.dart' show AppException;
 import 'package:dio/dio.dart';
 
-import 'api_client.dart';
-import 'network_exception_mapper.dart';
+import 'package:network/src/api_client.dart';
+import 'package:network/src/network_exception_mapper.dart';
 
 /// Dio-backed [ApiClient]. Owns base URL/timeouts and translates
 /// [DioException]s into domain-safe [AppException]s.

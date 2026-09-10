@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 
-import '../entities/pokemon_detail.dart';
-import '../repositories/pokemon_repository.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
 /// Fetches a single Pokemon's full detail by name.
 class GetPokemon implements UseCaseWithParams<PokemonDetail, String> {

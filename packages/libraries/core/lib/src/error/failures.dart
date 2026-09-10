@@ -1,6 +1,5 @@
+import 'package:core/src/error/exceptions.dart';
 import 'package:equatable/equatable.dart';
-
-import 'exceptions.dart';
 
 /// Failures live in the DOMAIN layer and are surfaced to presentation.
 /// They are the domain-safe counterpart of data-layer [AppException]s.

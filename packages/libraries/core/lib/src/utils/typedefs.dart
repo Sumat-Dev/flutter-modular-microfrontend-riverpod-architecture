@@ -1,6 +1,5 @@
+import 'package:core/src/error/failures.dart';
 import 'package:dartz/dartz.dart';
-
-import '../error/failures.dart';
 
 /// Convenience typedef for an async repository/use case result.
 ///

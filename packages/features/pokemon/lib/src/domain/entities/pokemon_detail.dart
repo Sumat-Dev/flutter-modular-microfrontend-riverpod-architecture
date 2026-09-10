@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'pokemon.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 
 /// Full Pokemon detail entity used on the detail page.
 class PokemonDetail extends Equatable {

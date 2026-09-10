@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
+import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../domain/entities/pokemon_detail.dart';
-import 'pokemon_providers.dart';
 
 /// Loads a single Pokemon's detail, keyed by name. Throws the domain [Failure]
 /// so the UI can surface it via [AsyncValue.error].

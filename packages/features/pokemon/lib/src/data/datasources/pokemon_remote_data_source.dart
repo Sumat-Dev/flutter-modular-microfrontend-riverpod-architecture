@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
+import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';
+import 'package:feature_pokemon/src/data/models/pokemon_model.dart';
 import 'package:network/network.dart';
-
-import '../models/pokemon_detail_model.dart';
-import '../models/pokemon_model.dart';
 
 /// Talks to PokeAPI via the shared [ApiClient] abstraction (never Dio directly).
 abstract interface class PokemonRemoteDataSource {

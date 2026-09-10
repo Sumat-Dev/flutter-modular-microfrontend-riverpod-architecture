@@ -1,11 +1,10 @@
+import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
+import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
+import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ui_components/ui_components.dart';
-
-import '../providers/pokemon_list_provider.dart';
-import '../utils/failure_message.dart';
-import '../widgets/pokemon_card.dart';
 
 /// Paginated Pokemon list. Consumes the domain use case via Riverpod (§7) and
 /// never touches the API directly (§5).

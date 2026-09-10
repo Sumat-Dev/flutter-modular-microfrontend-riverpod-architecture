@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
+import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';
 import 'package:storage/storage.dart';
-
-import '../models/pokemon_detail_model.dart';
 
 /// Caches Pokemon detail via the shared [KeyValueStore] abstraction.
 abstract interface class PokemonLocalDataSource {

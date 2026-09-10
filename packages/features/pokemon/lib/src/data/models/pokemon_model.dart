@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../domain/entities/pokemon.dart';
 
 part 'pokemon_model.g.dart';
 
