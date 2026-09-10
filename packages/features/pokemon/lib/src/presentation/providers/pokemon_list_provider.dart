@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_core/library_core.dart';
 
 import '../../domain/entities/pokemon.dart';
 import 'pokemon_providers.dart';
@@ -41,16 +41,16 @@ class PokemonListNotifier extends AsyncNotifier<PokemonListState> {
   Future<PokemonListState> _fetch(PokemonListState current) async {
     final useCase = ref.read(getPokemonListProvider);
     final result = await useCase(
-      PageRequest(offset: current.nextOffset, limit: _limit),
+      PageRequest(offset: current.nextOffset),
     );
-    return result.when(
-      success: (page) => current.copyWith(
+    return result.fold(
+      (f) => throw f,
+      (page) => current.copyWith(
         items: [...current.items, ...page.items],
         hasMore: page.hasMore,
         nextOffset: current.nextOffset + _limit,
         isLoadingMore: false,
       ),
-      failure: (f) => throw f,
     );
   }
 

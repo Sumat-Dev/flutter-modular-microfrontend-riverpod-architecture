@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_ui_components/library_ui_components.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ui_components/ui_components.dart';
 
 import '../providers/pokemon_list_provider.dart';
 import '../utils/failure_message.dart';
@@ -67,7 +67,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
                 final pokemon = data.items[index];
                 return PokemonCard(
                   pokemon: pokemon,
-                  onTap: () => Modular.to.pushNamed('./${pokemon.name}'),
+                  onTap: () => context.push('/pokemon/${pokemon.name}'),
                 );
               },
             ),

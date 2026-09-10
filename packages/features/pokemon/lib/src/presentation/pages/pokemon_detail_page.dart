@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_ui_components/library_ui_components.dart';
+import 'package:ui_components/ui_components.dart';
 
 import '../providers/pokemon_detail_provider.dart';
 import '../utils/failure_message.dart';

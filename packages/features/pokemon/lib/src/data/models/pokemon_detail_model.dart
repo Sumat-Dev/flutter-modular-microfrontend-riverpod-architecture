@@ -1,8 +1,16 @@
-import 'package:library_core/library_core.dart';
+import 'package:core/core.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/entities/pokemon_detail.dart';
 
+part 'pokemon_detail_model.g.dart';
+
 /// DTO for `/pokemon/{name}`.
+///
+/// The PokeAPI wire format nests type/stat names, so the nested fields use
+/// custom [JsonKey] converters. The same shape is used for the local cache
+/// round-trip, so `fromJson`/`toJson` are symmetric.
+@JsonSerializable(explicitToJson: true)
 class PokemonDetailModel {
   const PokemonDetailModel({
     required this.id,
@@ -13,47 +21,21 @@ class PokemonDetailModel {
     required this.stats,
   });
 
+  factory PokemonDetailModel.fromJson(DataMap json) =>
+      _$PokemonDetailModelFromJson(json);
+
   final int id;
   final String name;
   final int height;
   final int weight;
+
+  /// PokeAPI encodes types as `[{"type": {"name": "electric"}}]`.
+  @JsonKey(fromJson: _typesFromJson, toJson: _typesToJson)
   final List<String> types;
+
   final List<PokemonStatModel> stats;
 
-  factory PokemonDetailModel.fromJson(JsonMap json) {
-    final typeList = (json['types'] as List<dynamic>? ?? [])
-        .map((dynamic t) => (t as JsonMap)['type'] as JsonMap)
-        .map((JsonMap t) => t['name'] as String)
-        .toList();
-
-    final statList = (json['stats'] as List<dynamic>? ?? [])
-        .map((dynamic s) => PokemonStatModel.fromJson(s as JsonMap))
-        .toList();
-
-    return PokemonDetailModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      height: json['height'] as int,
-      weight: json['weight'] as int,
-      types: typeList,
-      stats: statList,
-    );
-  }
-
-  JsonMap toJson() => {
-    'id': id,
-    'name': name,
-    'height': height,
-    'weight': weight,
-    'types': types
-        .map(
-          (t) => {
-            'type': {'name': t},
-          },
-        )
-        .toList(),
-    'stats': stats.map((s) => s.toJson()).toList(),
-  };
+  DataMap toJson() => _$PokemonDetailModelToJson(this);
 
   PokemonDetail toEntity() => PokemonDetail(
     id: id,
@@ -63,23 +45,40 @@ class PokemonDetailModel {
     types: types,
     stats: stats.map((s) => s.toEntity()).toList(),
   );
+
+  static List<String> _typesFromJson(List<dynamic>? raw) => (raw ?? [])
+      .map((dynamic t) => (t as DataMap)['type'] as DataMap)
+      .map((DataMap t) => t['name'] as String)
+      .toList();
+
+  static List<Map<String, dynamic>> _typesToJson(List<String> types) => types
+      .map(
+        (t) => {
+          'type': {'name': t},
+        },
+      )
+      .toList();
 }
 
+/// DTO for a single stat entry: `{"base_stat": 35, "stat": {"name": "hp"}}`.
+@JsonSerializable()
 class PokemonStatModel {
   const PokemonStatModel({required this.name, required this.baseValue});
 
+  factory PokemonStatModel.fromJson(DataMap json) =>
+      _$PokemonStatModelFromJson(json);
+
+  @JsonKey(name: 'stat', fromJson: _nameFromStat, toJson: _nameToStat)
   final String name;
+
+  @JsonKey(name: 'base_stat')
   final int baseValue;
 
-  factory PokemonStatModel.fromJson(JsonMap json) => PokemonStatModel(
-    name: (json['stat'] as JsonMap)['name'] as String,
-    baseValue: json['base_stat'] as int,
-  );
-
-  JsonMap toJson() => {
-    'base_stat': baseValue,
-    'stat': {'name': name},
-  };
+  DataMap toJson() => _$PokemonStatModelToJson(this);
 
   PokemonStat toEntity() => PokemonStat(name: name, baseValue: baseValue);
+
+  static String _nameFromStat(DataMap stat) => stat['name'] as String;
+
+  static Map<String, dynamic> _nameToStat(String name) => {'name': name};
 }

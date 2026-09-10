@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_network/library_network.dart';
-import 'package:library_storage/library_storage.dart';
+import 'package:network/network.dart';
+import 'package:storage/storage.dart';
 
 import '../../data/datasources/pokemon_local_data_source.dart';
 import '../../data/datasources/pokemon_remote_data_source.dart';

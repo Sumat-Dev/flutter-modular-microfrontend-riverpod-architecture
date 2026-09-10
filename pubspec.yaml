@@ -8,11 +8,13 @@ environment:
 # `resolution: workspace` and shares this single lockfile / .dart_tool.
 workspace:
   - apps/pokemon_app
-  - packages/libraries/library_core
-  - packages/libraries/library_network
-  - packages/libraries/library_storage
-  - packages/libraries/library_ui_components
+  - packages/libraries/core
+  - packages/libraries/network
+  - packages/libraries/storage
+  - packages/libraries/ui_components
+  - packages/libraries/localization
   - packages/features/pokemon
 
 dev_dependencies:
   melos: ^6.3.2
+  very_good_analysis: ^10.0.0

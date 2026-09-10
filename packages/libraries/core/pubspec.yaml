@@ -1,0 +1,17 @@
+name: core
+description: "Generic infrastructure: Failure/Exception, UseCase contract, pagination, typedefs. No feature business logic."
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  dartz: ^0.10.1
+  equatable: ^2.0.7
+
+dev_dependencies:
+  test: ^1.25.8
+  lints: ^5.1.1

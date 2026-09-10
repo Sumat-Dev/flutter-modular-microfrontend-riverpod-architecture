@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:feature_pokemon/feature_pokemon.dart';
 import 'package:feature_pokemon/src/data/datasources/pokemon_local_data_source.dart';
 import 'package:feature_pokemon/src/data/datasources/pokemon_remote_data_source.dart';
@@ -5,9 +6,8 @@ import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';
 import 'package:feature_pokemon/src/data/models/pokemon_model.dart';
 import 'package:feature_pokemon/src/data/repositories/pokemon_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:library_core/library_core.dart';
-import 'package:library_storage/library_storage.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:storage/storage.dart';
 
 class _MockRemote extends Mock implements PokemonRemoteDataSource {}
 
@@ -47,8 +47,8 @@ void main() {
 
       final result = await repo.getPokemon('pikachu');
 
-      expect(result.isSuccess, isTrue);
-      final entity = (result as Success).value as PokemonDetail;
+      expect(result.isRight(), isTrue);
+      final entity = (result as Right).value as PokemonDetail;
       expect(entity.name, 'pikachu');
       verifyNever(() => remote.fetchPokemon(any()));
     });
@@ -62,7 +62,7 @@ void main() {
 
       final result = await repo.getPokemon('pikachu');
 
-      expect(result.isSuccess, isTrue);
+      expect(result.isRight(), isTrue);
       verify(() => remote.fetchPokemon('pikachu')).called(1);
       verify(() => local.writePokemon(any())).called(1);
     });
@@ -71,12 +71,12 @@ void main() {
       when(() => local.readPokemon('pikachu')).thenAnswer((_) async => null);
       when(
         () => remote.fetchPokemon('pikachu'),
-      ).thenThrow(const ServerException('500', statusCode: 500));
+      ).thenThrow(const ServerException(message: '500', statusCode: 500));
 
       final result = await repo.getPokemon('pikachu');
 
-      expect(result.isFailure, isTrue);
-      final failure = (result as ResultFailure).failure;
+      expect(result.isLeft(), isTrue);
+      final failure = (result as Left).value as Failure;
       expect(failure, isA<ServerFailure>());
       expect(failure.statusCode, 500);
     });
@@ -84,7 +84,7 @@ void main() {
     test('cache read failure is ignored and remote is used', () async {
       when(
         () => local.readPokemon('pikachu'),
-      ).thenThrow(const CacheException('corrupt'));
+      ).thenThrow(const CacheException(message: 'corrupt'));
       when(
         () => remote.fetchPokemon('pikachu'),
       ).thenAnswer((_) async => _detailModel());
@@ -92,7 +92,7 @@ void main() {
 
       final result = await repo.getPokemon('pikachu');
 
-      expect(result.isSuccess, isTrue);
+      expect(result.isRight(), isTrue);
     });
   });
 
@@ -108,11 +108,11 @@ void main() {
       );
 
       final result = await repo.getPokemonList(
-        const PageRequest(offset: 0, limit: 20),
+        const PageRequest(),
       );
 
-      expect(result.isSuccess, isTrue);
-      final page = (result as Success).value as PaginatedResult<Pokemon>;
+      expect(result.isRight(), isTrue);
+      final page = (result as Right).value as PaginatedResult<Pokemon>;
       expect(page.items.single.name, 'bulbasaur');
       expect(page.hasMore, isTrue);
     });
@@ -120,14 +120,14 @@ void main() {
     test('maps NetworkException to NetworkFailure', () async {
       when(
         () => remote.fetchPokemonList(offset: 0, limit: 20),
-      ).thenThrow(const NetworkException('offline'));
+      ).thenThrow(const NetworkException(message: 'offline'));
 
       final result = await repo.getPokemonList(
-        const PageRequest(offset: 0, limit: 20),
+        const PageRequest(),
       );
 
-      expect(result.isFailure, isTrue);
-      expect((result as ResultFailure).failure, isA<NetworkFailure>());
+      expect(result.isLeft(), isTrue);
+      expect((result as Left).value, isA<NetworkFailure>());
     });
   });
 

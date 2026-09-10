@@ -1,4 +1,4 @@
-import 'package:library_core/library_core.dart';
+import 'package:core/core.dart';
 
 /// Presentation-layer helper that turns a domain [Failure] into a message the
 /// user can read. Keeping this in presentation avoids leaking UI strings into
