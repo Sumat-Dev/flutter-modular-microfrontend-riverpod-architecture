@@ -1,11 +1,10 @@
+import 'package:feature_pokemon/src/presentation/providers/pokemon_detail_provider.dart';
+import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
+import 'package:feature_pokemon/src/presentation/widgets/pokemon_stat_view.dart';
+import 'package:feature_pokemon/src/presentation/widgets/pokemon_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_ui_components/library_ui_components.dart';
-
-import '../providers/pokemon_detail_provider.dart';
-import '../utils/failure_message.dart';
-import '../widgets/pokemon_stat_view.dart';
-import '../widgets/pokemon_type_chip.dart';
+import 'package:ui_components/ui_components.dart';
 
 /// Detail page for a single Pokemon, resolved by [name].
 class PokemonDetailPage extends ConsumerWidget {

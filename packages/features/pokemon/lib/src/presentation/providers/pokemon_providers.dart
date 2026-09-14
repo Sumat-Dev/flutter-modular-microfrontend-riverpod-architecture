@@ -1,13 +1,12 @@
+import 'package:feature_pokemon/src/data/datasources/pokemon_local_data_source.dart';
+import 'package:feature_pokemon/src/data/datasources/pokemon_remote_data_source.dart';
+import 'package:feature_pokemon/src/data/repositories/pokemon_repository_impl.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
+import 'package:feature_pokemon/src/domain/usecases/get_pokemon.dart';
+import 'package:feature_pokemon/src/domain/usecases/get_pokemon_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_network/library_network.dart';
-import 'package:library_storage/library_storage.dart';
-
-import '../../data/datasources/pokemon_local_data_source.dart';
-import '../../data/datasources/pokemon_remote_data_source.dart';
-import '../../data/repositories/pokemon_repository_impl.dart';
-import '../../domain/repositories/pokemon_repository.dart';
-import '../../domain/usecases/get_pokemon.dart';
-import '../../domain/usecases/get_pokemon_list.dart';
+import 'package:network/network.dart';
+import 'package:storage/storage.dart';
 
 /// Dependency graph for the Pokemon feature (plan §7).
 ///

@@ -1,15 +1,16 @@
-import 'package:library_core/library_core.dart';
+import 'package:core/core.dart';
 
-import '../entities/pokemon.dart';
-import '../repositories/pokemon_repository.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
 /// Fetches a page of Pokemon.
-class GetPokemonList implements UseCase<PaginatedResult<Pokemon>, PageRequest> {
+class GetPokemonList
+    implements UseCaseWithParams<PaginatedResult<Pokemon>, PageRequest> {
   const GetPokemonList(this._repository);
 
   final PokemonRepository _repository;
 
   @override
-  FutureResult<PaginatedResult<Pokemon>> call(PageRequest params) =>
+  ResultFuture<PaginatedResult<Pokemon>> call(PageRequest params) =>
       _repository.getPokemonList(params);
 }

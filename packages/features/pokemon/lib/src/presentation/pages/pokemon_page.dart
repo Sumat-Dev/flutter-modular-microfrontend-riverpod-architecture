@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:library_ui_components/library_ui_components.dart';
+import 'dart:async';
 
-import '../providers/pokemon_list_provider.dart';
-import '../utils/failure_message.dart';
-import '../widgets/pokemon_card.dart';
+import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
+import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
+import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ui_components/ui_components.dart';
 
 /// Paginated Pokemon list. Consumes the domain use case via Riverpod (§7) and
 /// never touches the API directly (§5).
@@ -36,7 +37,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
   void _onScroll() {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 300) {
-      ref.read(pokemonListProvider.notifier).loadMore();
+      unawaited(ref.read(pokemonListProvider.notifier).loadMore());
     }
   }
 
@@ -67,7 +68,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
                 final pokemon = data.items[index];
                 return PokemonCard(
                   pokemon: pokemon,
-                  onTap: () => Modular.to.pushNamed('./${pokemon.name}'),
+                  onTap: () => context.push('/pokemon/${pokemon.name}'),
                 );
               },
             ),

@@ -1,0 +1,16 @@
+name: storage
+description: "Local cache abstraction and a default in-memory implementation."
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  core: any
+
+dev_dependencies:
+  lints: ^5.1.1
+  test: ^1.25.8

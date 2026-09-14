@@ -24,10 +24,23 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
+*/build/*
 /build/
+
+# Melos / pub workspace
+# Melos may generate these path-based overrides which conflict with Dart pub
+# workspaces. This repo resolves packages via `workspace:` + `resolution: workspace`,
+# so these must never be committed.
+**/pubspec_overrides.yaml
+# Only the root lockfile is authoritative in a pub workspace.
+**/packages/**/pubspec.lock
+**/apps/**/pubspec.lock
 
 # Coverage
 coverage/
+
+# Test reports (JUnit XML for Codecov Test Analytics)
+**/junit.xml
 
 # Symbolication related
 app.*.symbols

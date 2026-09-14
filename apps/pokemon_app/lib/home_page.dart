@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pokemon_app/config/routes/app_routes.dart';
 
-/// Minimal landing page that routes into feature modules.
+/// Minimal landing page that routes into feature screens.
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -11,7 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Pokémon Flutter')),
       body: Center(
         child: FilledButton(
-          onPressed: () => Modular.to.pushNamed('/pokemon/'),
+          onPressed: () => context.go(Routes.pokemonList),
           child: const Text('Open Pokédex'),
         ),
       ),

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'app_module.dart';
+import 'package:pokemon_app/config/routes/app_pages.dart';
+import 'package:pokemon_app/config/themes/app_theme.dart';
 
 void main() {
-  runApp(
-    // ProviderScope hosts the Riverpod dependency graph; ModularApp provides
-    // routing/module composition (plan §6/§7).
-    ProviderScope(
-      child: ModularApp(module: AppModule(), child: const AppWidget()),
-    ),
-  );
+  // ProviderScope hosts the Riverpod dependency graph; routing is handled by
+  // go_router (see AppPages.router).
+  runApp(const ProviderScope(child: AppWidget()));
 }
 
 class AppWidget extends StatelessWidget {
@@ -22,11 +17,10 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'Pokémon Flutter',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
-      ),
-      routerConfig: Modular.routerConfig,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: AppTheme.system,
+      routerConfig: AppPages.router,
     );
   }
 }

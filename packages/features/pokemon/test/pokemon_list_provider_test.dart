@@ -1,34 +1,33 @@
+import 'package:core/core.dart';
 import 'package:feature_pokemon/feature_pokemon.dart';
 import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:library_core/library_core.dart';
 
 class _FakeRepo implements PokemonRepository {
   _FakeRepo({this.fail = false});
   final bool fail;
 
   @override
-  FutureResult<PaginatedResult<Pokemon>> getPokemonList(
+  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(
     PageRequest page,
   ) async {
     if (fail) {
-      return const Result.failure(NetworkFailure('offline'));
+      return const Left(NetworkFailure(message: 'offline'));
     }
-    return Result.success(
+    return const Right(
       PaginatedResult<Pokemon>(
         count: 1,
-        items: const [Pokemon(id: 1, name: 'bulbasaur')],
-        next: null,
+        items: [Pokemon(id: 1, name: 'bulbasaur')],
       ),
     );
   }
 
   @override
-  FutureResult<PokemonDetail> getPokemon(String name) async =>
-      const Result.failure(UnexpectedFailure('unused'));
+  ResultFuture<PokemonDetail> getPokemon(String name) async =>
+      const Left(UnexpectedFailure(message: 'unused'));
 }
 
 void main() {

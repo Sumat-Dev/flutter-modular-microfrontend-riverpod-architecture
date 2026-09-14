@@ -1,6 +1,5 @@
+import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
 import 'package:flutter/material.dart';
-
-import '../../domain/entities/pokemon_detail.dart';
 
 /// Displays a single base stat as a labelled progress bar.
 class PokemonStatView extends StatelessWidget {

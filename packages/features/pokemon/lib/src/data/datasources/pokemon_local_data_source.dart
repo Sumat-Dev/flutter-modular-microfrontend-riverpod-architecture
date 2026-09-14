@@ -1,7 +1,6 @@
-import 'package:library_core/library_core.dart';
-import 'package:library_storage/library_storage.dart';
-
-import '../models/pokemon_detail_model.dart';
+import 'package:core/core.dart';
+import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';
+import 'package:storage/storage.dart';
 
 /// Caches Pokemon detail via the shared [KeyValueStore] abstraction.
 abstract interface class PokemonLocalDataSource {
@@ -26,7 +25,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
     try {
       return PokemonDetailModel.fromJson(json);
     } on Object catch (e) {
-      throw CacheException('Corrupt cache for "$name": $e');
+      throw CacheException(message: 'Corrupt cache for "$name": $e');
     }
   }
 

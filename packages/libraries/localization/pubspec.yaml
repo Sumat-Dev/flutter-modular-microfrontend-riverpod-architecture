@@ -1,0 +1,23 @@
+name: localization
+description: "Localization setup and shared translation utilities reused across features."
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

@@ -1,10 +1,9 @@
-import 'package:library_core/library_core.dart';
-
-import '../../domain/entities/pokemon.dart';
-import '../../domain/entities/pokemon_detail.dart';
-import '../../domain/repositories/pokemon_repository.dart';
-import '../datasources/pokemon_local_data_source.dart';
-import '../datasources/pokemon_remote_data_source.dart';
+import 'package:core/core.dart';
+import 'package:feature_pokemon/src/data/datasources/pokemon_local_data_source.dart';
+import 'package:feature_pokemon/src/data/datasources/pokemon_remote_data_source.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
+import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
+import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
 /// Implements [PokemonRepository]. Applies the cache strategy from plan §11
 /// (cache hit → entity; miss → remote → save → entity) and maps data-layer
@@ -20,7 +19,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   final PokemonLocalDataSource _local;
 
   @override
-  FutureResult<PaginatedResult<Pokemon>> getPokemonList(
+  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(
     PageRequest page,
   ) async {
     try {
@@ -34,21 +33,21 @@ class PokemonRepositoryImpl implements PokemonRepository {
         previous: res.previous,
         items: res.items.map((m) => m.toEntity()).toList(),
       );
-      return Result.success(result);
+      return Right(result);
     } on AppException catch (e) {
-      return Result.failure(_mapException(e));
+      return Left(_mapException(e));
     } on Object catch (e) {
-      return Result.failure(UnexpectedFailure('$e'));
+      return Left(UnexpectedFailure(message: '$e'));
     }
   }
 
   @override
-  FutureResult<PokemonDetail> getPokemon(String name) async {
+  ResultFuture<PokemonDetail> getPokemon(String name) async {
     // 1. Try cache. A cache failure must not break the feature (§11).
     try {
       final cached = await _local.readPokemon(name);
       if (cached != null) {
-        return Result.success(cached.toEntity());
+        return Right(cached.toEntity());
       }
     } on CacheException {
       // Ignore and fall through to remote.
@@ -62,18 +61,18 @@ class PokemonRepositoryImpl implements PokemonRepository {
       } on CacheException {
         // Persisting is best-effort; ignore write failures.
       }
-      return Result.success(model.toEntity());
+      return Right(model.toEntity());
     } on AppException catch (e) {
-      return Result.failure(_mapException(e));
+      return Left(_mapException(e));
     } on Object catch (e) {
-      return Result.failure(UnexpectedFailure('$e'));
+      return Left(UnexpectedFailure(message: '$e'));
     }
   }
 
   Failure _mapException(AppException e) => switch (e) {
-    NetworkException() => NetworkFailure(e.message, statusCode: e.statusCode),
-    ServerException() => ServerFailure(e.message, statusCode: e.statusCode),
-    CacheException() => CacheFailure(e.message),
-    ParsingException() => UnexpectedFailure(e.message),
+    NetworkException() => NetworkFailure.fromException(e),
+    ServerException() => ServerFailure.fromException(e),
+    CacheException() => CacheFailure.fromException(e),
+    ParsingException() => UnexpectedFailure(message: e.message),
   };
 }

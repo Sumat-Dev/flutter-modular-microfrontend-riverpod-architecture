@@ -4,15 +4,55 @@ publish_to: none
 environment:
   sdk: ^3.9.2
 
-# Dart pub workspace (Dart >= 3.6). Every member package sets
-# `resolution: workspace` and shares this single lockfile / .dart_tool.
 workspace:
   - apps/pokemon_app
-  - packages/libraries/library_core
-  - packages/libraries/library_network
-  - packages/libraries/library_storage
-  - packages/libraries/library_ui_components
+  - packages/libraries/core
+  - packages/libraries/network
+  - packages/libraries/storage
+  - packages/libraries/ui_components
+  - packages/libraries/localization
   - packages/features/pokemon
 
 dev_dependencies:
-  melos: ^6.3.2
+  melos: ^8.0.0
+  very_good_analysis: ^10.0.0
+
+melos:
+  packages:
+    - apps/**
+    - packages/features/**
+    - packages/libraries/**
+
+  command:
+    bootstrap:
+      hooks:
+        pre: flutter pub get
+
+  scripts:
+    analyze:
+      description: Run `flutter analyze` in all packages.
+      # `-c 1` runs one package at a time: parallel `flutter` invocations fight
+      # over Flutter's global startup lock and spam "Waiting for another flutter
+      # command to release the startup lock...".
+      run: dart run melos exec -c 1 -- flutter analyze
+    format:
+      description: Verify formatting across all packages.
+      # `dart format` doesn't touch the Flutter lock, so it can run in parallel.
+      run: dart run melos exec -- dart format --output=none --set-exit-if-changed .
+    format:fix:
+      description: Apply Dart formatting across all packages.
+      run: dart run melos exec -- dart format .
+    test:
+      description: Run tests in every package that has a test/ directory.
+      run: dart run melos exec -c 1 --dir-exists=test -- flutter test
+    test:coverage:
+      description: Run tests with coverage in every testable package.
+      run: dart run melos exec -c 1 --dir-exists=test -- flutter test --coverage
+    test:junit:
+      description: >
+        Run tests with coverage and emit a JUnit XML report per package
+        (junit.xml) for Codecov Test Analytics. Requires the `junitreport`
+        package to be activated (`dart pub global activate junitreport`).
+      run: >
+        dart run melos exec -c 1 --dir-exists=test -- "flutter test --coverage
+        --machine | tojunit --output junit.xml"

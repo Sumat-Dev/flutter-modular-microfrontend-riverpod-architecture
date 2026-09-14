@@ -1,5 +1,5 @@
 name: pokemon_app
-description: "Root application shell. Owns bootstrap and top-level module composition only."
+description: "Root application shell. Owns bootstrap, theming, and go_router route composition."
 publish_to: none
 version: 1.0.0+1
 
@@ -9,29 +9,29 @@ environment:
 resolution: workspace
 
 dependencies:
+  # Workspace libraries and feature microfrontends are resolved by name via
+  # the pub workspace.
+  core: any
+  cupertino_icons: ^1.0.8
+  feature_pokemon: any
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-
-  # Routing / module composition
-  flutter_modular: ^6.3.4
-
-  # State management + DI
   flutter_riverpod: ^2.6.1
-
-  # Workspace libraries (resolved by name via the pub workspace)
-  library_core: any
-  library_network: any
-  library_storage: any
-  library_ui_components: any
-
-  # Feature microfrontends (resolved by name via the pub workspace)
-  feature_pokemon: any
+  go_router: ^17.2.1
+  localization: any
+  network: any
+  storage: any
+  ui_components: any
 
 dev_dependencies:
+  build_runner: ^2.4.13
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  # This project's Flutter SDK caps analyzer <8.0.0 (via flutter_test/test), so
+  # go_router_builder is pinned to 4.1.1 (the newest build still allowing
+  # analyzer 7.x). Newer builders require analyzer >=8.2.0.
+  go_router_builder: 4.1.1
 
 flutter:
   uses-material-design: true
