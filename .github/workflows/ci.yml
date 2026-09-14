@@ -52,8 +52,13 @@ jobs:
       - name: Resolve workspace dependencies
         run: flutter pub get
 
-      - name: Run package tests with coverage
-        run: dart run melos run test:coverage
+      - name: Activate junitreport (JUnit XML converter)
+        run: dart pub global activate junitreport
+
+      - name: Run package tests with coverage (JUnit XML)
+        run: |
+          export PATH="$PATH:$HOME/.pub-cache/bin"
+          dart run melos run test:junit
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v6
@@ -61,3 +66,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture
           fail_ci_if_error: false
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture

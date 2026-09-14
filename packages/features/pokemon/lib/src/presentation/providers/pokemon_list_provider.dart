@@ -43,6 +43,9 @@ class PokemonListNotifier extends AsyncNotifier<PokemonListState> {
       PageRequest(offset: current.nextOffset),
     );
     return result.fold(
+      // Deliberately rethrow the domain Failure so callers can surface it via
+      // AsyncValue.error / AsyncValue.guard.
+      // ignore: only_throw_errors
       (f) => throw f,
       (page) => current.copyWith(
         items: [...current.items, ...page.items],

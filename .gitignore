@@ -39,6 +39,9 @@ migrate_working_dir/
 # Coverage
 coverage/
 
+# Test reports (JUnit XML for Codecov Test Analytics)
+**/junit.xml
+
 # Symbolication related
 app.*.symbols
 

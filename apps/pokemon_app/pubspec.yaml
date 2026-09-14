@@ -9,31 +9,25 @@ environment:
 resolution: workspace
 
 dependencies:
+  # Workspace libraries and feature microfrontends are resolved by name via
+  # the pub workspace.
+  core: any
+  cupertino_icons: ^1.0.8
+  feature_pokemon: any
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-
-  # Routing
-  go_router: ^17.2.1
-
-  # State management + DI
   flutter_riverpod: ^2.6.1
-
-  # Workspace libraries (resolved by name via the pub workspace)
-  core: any
+  go_router: ^17.2.1
+  localization: any
   network: any
   storage: any
   ui_components: any
-  localization: any
-
-  # Feature microfrontends (resolved by name via the pub workspace)
-  feature_pokemon: any
 
 dev_dependencies:
+  build_runner: ^2.4.13
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  build_runner: ^2.4.13
   # This project's Flutter SDK caps analyzer <8.0.0 (via flutter_test/test), so
   # go_router_builder is pinned to 4.1.1 (the newest build still allowing
   # analyzer 7.x). Newer builders require analyzer >=8.2.0.

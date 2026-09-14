@@ -8,7 +8,9 @@ AppException mapDioException(DioException e) {
     case DioExceptionType.sendTimeout:
     case DioExceptionType.receiveTimeout:
     case DioExceptionType.connectionError:
-      return NetworkException(message: e.message ?? 'Network connection error');
+      return NetworkException(
+        message: e.message ?? 'Network connection error',
+      );
     case DioExceptionType.badResponse:
       final status = e.response?.statusCode;
       return ServerException(
@@ -19,11 +21,8 @@ AppException mapDioException(DioException e) {
       return const NetworkException(message: 'Request cancelled');
     case DioExceptionType.badCertificate:
     case DioExceptionType.unknown:
+    case DioExceptionType.transformTimeout:
       return NetworkException(message: e.message ?? 'Unknown network error');
-    // Newer Dio versions may add enum values (e.g. transformTimeout);
-    // treat any of them as a network error.
-    default:
-      return NetworkException(message: e.message ?? 'Network error');
   }
 }
 

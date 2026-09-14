@@ -9,18 +9,18 @@ environment:
 resolution: workspace
 
 dependencies:
+  core: any
   dio: ^5.7.0
   # Pinned to 4.9.1: retrofit_generator 10.2.0 exhaustively switches over the
   # Parser enum, and 4.9.2 added `Parser.DartMappable` which that generator
   # can't handle. 4.9.1 is the newest runtime matching this generator.
   retrofit: 4.9.1
-  core: any
 
 dev_dependencies:
-  test: ^1.25.8
-  lints: ^5.1.1
   build_runner: ^2.4.13
+  lints: ^5.1.1
   # This project's Flutter SDK pins analyzer <8.0.0 (via flutter_test), so
   # retrofit_generator is capped at 10.2.0 (the newest build that still allows
   # analyzer 7.x). Newer generators require analyzer >=8/13.
   retrofit_generator: 10.2.0
+  test: ^1.25.8

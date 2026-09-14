@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
 import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
@@ -35,7 +37,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
   void _onScroll() {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 300) {
-      ref.read(pokemonListProvider.notifier).loadMore();
+      unawaited(ref.read(pokemonListProvider.notifier).loadMore());
     }
   }
 

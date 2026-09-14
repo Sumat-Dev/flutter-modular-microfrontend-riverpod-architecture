@@ -12,5 +12,8 @@ final FutureProviderFamily<PokemonDetail, String> pokemonDetailProvider =
     ) async {
       final useCase = ref.watch(getPokemonProvider);
       final result = await useCase(name);
+      // Deliberately rethrow the domain Failure so Riverpod surfaces it via
+      // AsyncValue.error (see doc comment above).
+      // ignore: only_throw_errors
       return result.fold((f) => throw f, (detail) => detail);
     });
