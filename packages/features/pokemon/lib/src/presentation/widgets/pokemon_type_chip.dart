@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Small chip displaying a Pokemon type label.
 class PokemonTypeChip extends StatelessWidget {

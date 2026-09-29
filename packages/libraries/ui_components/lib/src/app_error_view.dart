@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Generic error view with an optional retry callback. Feature-agnostic:
 /// callers pass a human-readable [message].
