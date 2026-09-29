@@ -16,6 +16,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   go_router: ^17.2.1
   json_annotation: ^4.9.0
+  material_ui: ^1.5.0
   network: any
   storage: any
   ui_components: any

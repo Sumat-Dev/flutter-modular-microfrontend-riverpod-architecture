@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
 import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:ui_components/ui_components.dart';
 
 /// Paginated Pokemon list. Consumes the domain use case via Riverpod (§7) and

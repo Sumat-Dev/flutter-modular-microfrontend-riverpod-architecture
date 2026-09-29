@@ -24,8 +24,14 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-*/build/*
+# Ignore any `build/` output directory at any depth.
+**/build/
 /build/
+**/.dart_tool/
+
+# FVM (Flutter Version Management)
+# Commit .fvmrc (the version pin) but ignore the local SDK symlink cache.
+.fvm/
 
 # Melos / pub workspace
 # Melos may generate these path-based overrides which conflict with Dart pub

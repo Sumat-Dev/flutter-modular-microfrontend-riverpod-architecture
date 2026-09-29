@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart' show MaterialApp;
-import 'package:flutter/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Shared localization configuration reused by the app shell and features.
 ///
-/// Feature packages depend on this instead of wiring up
-/// `flutter_localizations` individually, keeping locale support consistent
-/// across the whole application.
+/// As of Flutter 3.47, the Material/Cupertino localization delegates ship
+/// inside `package:material_ui` (they were unbundled from
+/// `flutter_localizations`). Feature packages depend on this instead of wiring
+/// up delegates individually, keeping locale support consistent across the
+/// whole application.
 class AppLocalizationConfig {
   const AppLocalizationConfig._();
 
@@ -19,12 +19,12 @@ class AppLocalizationConfig {
   static const Locale fallbackLocale = Locale('en');
 
   /// Localizations delegates required by [WidgetsApp]/[MaterialApp].
+  ///
+  /// [GlobalMaterialLocalizations.delegates] bundles the Material, Cupertino,
+  /// and Widgets delegates in one list, so no separate `flutter_localizations`
+  /// wiring is needed.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ];
+      GlobalMaterialLocalizations.delegates;
 
   /// Resolves a device [locale] to a supported one, falling back to
   /// [fallbackLocale] when there is no match.

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:localization/localization.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pokemon_app/config/routes/app_pages.dart';
 import 'package:pokemon_app/config/themes/app_theme.dart';
 
@@ -20,6 +21,8 @@ class AppWidget extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: AppTheme.system,
+      localizationsDelegates: AppLocalizationConfig.localizationsDelegates,
+      supportedLocales: AppLocalizationConfig.supportedLocales,
       routerConfig: AppPages.router,
     );
   }

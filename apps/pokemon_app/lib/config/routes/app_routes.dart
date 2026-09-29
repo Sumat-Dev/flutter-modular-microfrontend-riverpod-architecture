@@ -1,6 +1,6 @@
 import 'package:feature_pokemon/feature_pokemon.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pokemon_app/home_page.dart';
 
 part 'app_routes.g.dart';
