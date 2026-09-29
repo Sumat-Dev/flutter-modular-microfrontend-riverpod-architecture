@@ -1,5 +1,10 @@
 # flutter_modular_microfrontend_riverpod_architecture
 
+[![codecov](https://codecov.io/gh/Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture/branch/main/graph/badge.svg?token=xXHDwrNGbB)](https://codecov.io/gh/Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture)
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 A new Flutter project.
 
 ## Getting Started
