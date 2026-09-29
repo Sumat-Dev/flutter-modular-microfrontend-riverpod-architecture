@@ -1,9 +1,10 @@
 import 'package:core/core.dart';
 import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-/// Immutable UI state for the paginated Pokemon list.
+part 'pokemon_list_provider.g.dart';
+
 class PokemonListState {
   const PokemonListState({
     this.items = const [],
@@ -30,8 +31,8 @@ class PokemonListState {
   );
 }
 
-/// Loads the first page and appends subsequent pages on demand.
-class PokemonListNotifier extends AsyncNotifier<PokemonListState> {
+@Riverpod(keepAlive: true)
+class PokemonList extends _$PokemonList {
   static const _limit = 20;
 
   @override
@@ -56,9 +57,8 @@ class PokemonListNotifier extends AsyncNotifier<PokemonListState> {
     );
   }
 
-  /// Loads the next page, keeping already-loaded items visible.
   Future<void> loadMore() async {
-    final current = state.valueOrNull;
+    final current = state.value;
     if (current == null || current.isLoadingMore || !current.hasMore) {
       return;
     }
@@ -75,8 +75,3 @@ class PokemonListNotifier extends AsyncNotifier<PokemonListState> {
     state = await AsyncValue.guard(() => _fetch(const PokemonListState()));
   }
 }
-
-final pokemonListProvider =
-    AsyncNotifierProvider<PokemonListNotifier, PokemonListState>(
-      PokemonListNotifier.new,
-    );

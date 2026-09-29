@@ -3,7 +3,6 @@ import 'package:core/core.dart';
 import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
 import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
-/// Fetches a single Pokemon's full detail by name.
 class GetPokemon implements UseCaseWithParams<PokemonDetail, String> {
   const GetPokemon(this._repository);
 

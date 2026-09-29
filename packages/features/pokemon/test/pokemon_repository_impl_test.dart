@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:feature_pokemon/feature_pokemon.dart';
+import 'package:feature_pokemon/pokemon_module.dart';
 import 'package:feature_pokemon/src/data/datasources/pokemon_local_data_source.dart';
 import 'package:feature_pokemon/src/data/datasources/pokemon_remote_data_source.dart';
 import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';

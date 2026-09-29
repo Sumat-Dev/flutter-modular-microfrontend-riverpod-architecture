@@ -3,8 +3,6 @@ import 'package:feature_pokemon/src/data/models/pokemon_detail_model.dart';
 import 'package:feature_pokemon/src/data/models/pokemon_model.dart';
 import 'package:network/network.dart';
 
-/// Talks to PokeAPI via the shared [ApiClient] abstraction
-/// (never Dio directly).
 abstract interface class PokemonRemoteDataSource {
   Future<
     ({int count, String? next, String? previous, List<PokemonModel> items})

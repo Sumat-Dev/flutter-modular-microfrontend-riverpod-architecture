@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Small chip displaying a Pokemon type label.
 class PokemonTypeChip extends StatelessWidget {
   const PokemonTypeChip({required this.type, super.key});
 
