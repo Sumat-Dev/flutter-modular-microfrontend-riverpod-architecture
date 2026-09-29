@@ -10,9 +10,19 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Pokémon Flutter')),
       body: Center(
-        child: FilledButton(
-          onPressed: () => Modular.to.navigate('/pokemon'),
-          child: const Text('Open Pokédex'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FilledButton(
+              onPressed: () => Modular.to.navigate('/pokemon'),
+              child: const Text('Open Pokédex'),
+            ),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => Modular.to.navigate('/berries'),
+              child: const Text('Open Berries'),
+            ),
+          ],
         ),
       ),
     );
