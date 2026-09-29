@@ -13,7 +13,9 @@ class _PagingRepo implements PokemonRepository {
   int listCalls = 0;
 
   @override
-  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(PageRequest page) async {
+  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(
+    PageRequest page,
+  ) async {
     listCalls++;
     // First page (offset 0) has more; second page (offset 20) is the last.
     final isFirst = page.offset == 0;
@@ -53,7 +55,9 @@ class _FailingLoadMoreRepo implements PokemonRepository {
   int calls = 0;
 
   @override
-  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(PageRequest page) async {
+  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(
+    PageRequest page,
+  ) async {
     calls++;
     if (calls == 1) {
       return const Right(

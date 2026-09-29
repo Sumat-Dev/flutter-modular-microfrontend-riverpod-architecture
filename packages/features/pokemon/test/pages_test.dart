@@ -24,7 +24,9 @@ class _FakeRepo implements PokemonRepository {
   final Duration detailDelay;
 
   @override
-  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(PageRequest page) async {
+  ResultFuture<PaginatedResult<Pokemon>> getPokemonList(
+    PageRequest page,
+  ) async {
     if (listDelay > Duration.zero) {
       await Future<void>.delayed(listDelay);
     }
@@ -67,7 +69,9 @@ void main() {
       tester,
     ) async {
       final repo = _FakeRepo(detailDelay: const Duration(milliseconds: 50));
-      await tester.pumpWidget(_app(repo, const PokemonDetailPage(name: 'pikachu')));
+      await tester.pumpWidget(
+        _app(repo, const PokemonDetailPage(name: 'pikachu')),
+      );
 
       // Initial frame: still loading.
       expect(find.byType(CircularProgressIndicator), findsWidgets);
@@ -77,7 +81,9 @@ void main() {
 
     testWidgets('renders detail data on success', (tester) async {
       final repo = _FakeRepo();
-      await tester.pumpWidget(_app(repo, const PokemonDetailPage(name: 'pikachu')));
+      await tester.pumpWidget(
+        _app(repo, const PokemonDetailPage(name: 'pikachu')),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('#25'), findsOneWidget);

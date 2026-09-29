@@ -18,14 +18,20 @@ void main() {
   group('fetchPokemonList', () {
     test('parses paging metadata and maps items', () async {
       when(
-        () => client.get<DataMap>('pokemon', queryParameters: any(named: 'queryParameters')),
+        () => client.get<DataMap>(
+          'pokemon',
+          queryParameters: any(named: 'queryParameters'),
+        ),
       ).thenAnswer(
         (_) async => {
           'count': 2,
           'next': 'next-url',
           'previous': null,
           'results': [
-            {'name': 'bulbasaur', 'url': 'https://pokeapi.co/api/v2/pokemon/1/'},
+            {
+              'name': 'bulbasaur',
+              'url': 'https://pokeapi.co/api/v2/pokemon/1/',
+            },
             {'name': 'ivysaur', 'url': 'https://pokeapi.co/api/v2/pokemon/2/'},
           ],
         },
@@ -42,7 +48,10 @@ void main() {
 
     test('throws ParsingException on malformed payload', () async {
       when(
-        () => client.get<DataMap>('pokemon', queryParameters: any(named: 'queryParameters')),
+        () => client.get<DataMap>(
+          'pokemon',
+          queryParameters: any(named: 'queryParameters'),
+        ),
       ).thenAnswer(
         (_) async => {
           'count': 'not-an-int',
@@ -58,7 +67,10 @@ void main() {
 
     test('propagates transport exceptions from client', () async {
       when(
-        () => client.get<DataMap>('pokemon', queryParameters: any(named: 'queryParameters')),
+        () => client.get<DataMap>(
+          'pokemon',
+          queryParameters: any(named: 'queryParameters'),
+        ),
       ).thenThrow(const NetworkException(message: 'offline'));
 
       expect(

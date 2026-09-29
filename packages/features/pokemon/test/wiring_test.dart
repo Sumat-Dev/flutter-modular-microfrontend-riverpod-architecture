@@ -31,7 +31,10 @@ void main() {
         container.read(pokemonLocalDataSourceProvider),
         isA<PokemonLocalDataSource>(),
       );
-      expect(container.read(pokemonRepositoryProvider), isA<PokemonRepository>());
+      expect(
+        container.read(pokemonRepositoryProvider),
+        isA<PokemonRepository>(),
+      );
       expect(container.read(getPokemonListProvider), isA<GetPokemonList>());
       expect(container.read(getPokemonProvider), isA<GetPokemon>());
     });
