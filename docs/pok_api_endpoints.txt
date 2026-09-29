@@ -1,0 +1,884 @@
+================================================================================
+                                PokéAPI v2 ENDPOINTS
+================================================================================
+
+--------------------------------------------------------------------------------
+1. BERRIES
+--------------------------------------------------------------------------------
+
+1.1 Berries
+Endpoint: GET https://pokeapi.co/api/v2/berry/{id or name}/
+Description: Berries are small fruits that can provide HP and status condition restoration.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "cheri",
+  "growth_time": 3,
+  "max_harvest": 5,
+  "natural_gift_power": 60,
+  "size": 20,
+  "smoothness": 25,
+  "soil_dryness": 15,
+  "firmness": {
+    "name": "soft",
+    "url": "https://pokeapi.co/api/v2/berry-firmness/2/"
+  },
+  "flavors": [
+    {
+      "potency": 10,
+      "flavor": {
+        "name": "spicy",
+        "url": "https://pokeapi.co/api/v2/berry-flavor/1/"
+      }
+    }
+  ],
+  "item": {
+    "name": "cheri-berry",
+    "url": "https://pokeapi.co/api/v2/item/126/"
+  },
+  "natural_gift_type": {
+    "name": "fire",
+    "url": "https://pokeapi.co/api/v2/type/10/"
+  }
+}
+
+--------------------------------------------------------------------------------
+
+1.2 Berry Firmnesses
+Endpoint: GET https://pokeapi.co/api/v2/berry-firmness/{id or name}/
+Description: Determination of berry firmness (e.g., soft, hard, super-hard).
+
+Sample Response:
+{
+  "id": 1,
+  "name": "very-soft",
+  "berries": [
+    {
+      "name": "pecha",
+      "url": "https://pokeapi.co/api/v2/berry/3/"
+    }
+  ],
+  "names": [
+    {
+      "name": "Very Soft",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+1.3 Berry Flavors
+Endpoint: GET https://pokeapi.co/api/v2/berry-flavor/{id or name}/
+Description: Flavors determine whether a Pokémon will benefit or suffer from eating a berry based on their nature.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "spicy",
+  "berries": [
+    {
+      "potency": 10,
+      "berry": {
+        "name": "rowap",
+        "url": "https://pokeapi.co/api/v2/berry/64/"
+      }
+    }
+  ],
+  "contest_type": {
+    "name": "cool",
+    "url": "https://pokeapi.co/api/v2/contest-type/1/"
+  },
+  "names": [
+    {
+      "name": "Spicy",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+
+================================================================================
+2. ITEMS
+================================================================================
+
+2.1 Items
+Endpoint: GET https://pokeapi.co/api/v2/item/{id or name}/
+Description: An item is an object in the Pokémon games which the player can pick up, keep in their bag, or have a Pokémon hold.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "master-ball",
+  "cost": 0,
+  "fling_power": null,
+  "fling_effect": null,
+  "attributes": [
+    {
+      "name": "holdable",
+      "url": "https://pokeapi.co/api/v2/item-attribute/5/"
+    }
+  ],
+  "category": {
+    "name": "standard-balls",
+    "url": "https://pokeapi.co/api/v2/item-category/34/"
+  },
+  "effect_entries": [
+    {
+      "effect": "Catches any wild Pokémon without fail.",
+      "short_effect": "Catches any wild Pokémon without fail.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "text": "The best Ball with the ultimate level of performance. It will catch any wild Pokémon without fail.",
+      "version_group": {
+        "name": "red-blue",
+        "url": "https://pokeapi.co/api/v2/version-group/1/"
+      },
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "game_indices": [
+    {
+      "game_index": 1,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    }
+  ],
+  "names": [
+    {
+      "name": "Master Ball",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "sprites": {
+    "default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png"
+  },
+  "held_by_pokemon": [],
+  "baby_trigger_for": null
+}
+
+--------------------------------------------------------------------------------
+
+2.2 Item Attributes
+Endpoint: GET https://pokeapi.co/api/v2/item-attribute/{id or name}/
+Description: Item attributes define particular aspects of items, e.g., "usable-in-battle".
+
+Sample Response:
+{
+  "id": 1,
+  "name": "countable",
+  "items": [
+    {
+      "name": "master-ball",
+      "url": "https://pokeapi.co/api/v2/item/1/"
+    }
+  ],
+  "names": [
+    {
+      "name": "Countable",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "descriptions": [
+    {
+      "description": "Has a count in the bag",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+2.3 Item Categories
+Endpoint: GET https://pokeapi.co/api/v2/item-category/{id or name}/
+Description: Item categories organize items into groups like stat-boosts or standard-balls.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "stat-boosts",
+  "items": [
+    {
+      "name": "guard-spec",
+      "url": "https://pokeapi.co/api/v2/item/55/"
+    }
+  ],
+  "names": [
+    {
+      "name": "Stat boosts",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pocket": {
+    "name": "battle",
+    "url": "https://pokeapi.co/api/v2/item-pocket/7/"
+  }
+}
+
+--------------------------------------------------------------------------------
+
+2.4 Item Fling Effects
+Endpoint: GET https://pokeapi.co/api/v2/item-fling-effect/{id or name}/
+Description: The various effects of using the move "Fling" with an item.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "badly-poison",
+  "effect_entries": [
+    {
+      "effect": "Badly poisons the target.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "items": [
+    {
+      "name": "toxic-orb",
+      "url": "https://pokeapi.co/api/v2/item/249/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+2.5 Item Pockets
+Endpoint: GET https://pokeapi.co/api/v2/item-pocket/{id or name}/
+Description: Pockets within the player's inventory bag.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "misc",
+  "categories": [
+    {
+      "name": "collectibles",
+      "url": "https://pokeapi.co/api/v2/item-category/9/"
+    }
+  ],
+  "names": [
+    {
+      "name": "Items",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+
+================================================================================
+3. POKEMON
+================================================================================
+
+3.1 Ability
+Endpoint: GET https://pokeapi.co/api/v2/ability/{id or name}/
+Description: Abilities provide passive effects for Pokémon in or out of battle.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "stench",
+  "is_main_series": true,
+  "generation": {
+    "name": "generation-iii",
+    "url": "https://pokeapi.co/api/v2/generation/3/"
+  },
+  "names": [
+    {
+      "name": "Stench",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "effect_entries": [
+    {
+      "effect": "This Pokémon's attacks have a 10% chance to cause the target to flinch.",
+      "short_effect": "Has a 10% chance of causing flinching when the user attacks.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pokemon": [
+    {
+      "is_hidden": true,
+      "slot": 3,
+      "pokemon": {
+        "name": "gloom",
+        "url": "https://pokeapi.co/api/v2/pokemon/44/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.2 Characteristics
+Endpoint: GET https://pokeapi.co/api/v2/characteristic/{id}/
+Description: Characteristics indicate a Pokémon's highest IV and personality traits.
+
+Sample Response:
+{
+  "id": 1,
+  "gene_modulo": 0,
+  "possible_values": [0, 5, 10, 15, 20, 25, 30],
+  "highest_stat": {
+    "name": "hp",
+    "url": "https://pokeapi.co/api/v2/stat/1/"
+  },
+  "descriptions": [
+    {
+      "description": "Loves to eat",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.3 Egg Groups
+Endpoint: GET https://pokeapi.co/api/v2/egg-group/{id or name}/
+Description: Egg groups determine which Pokémon can breed with each other.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "monster",
+  "names": [
+    {
+      "name": "Monster",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pokemon_species": [
+    {
+      "name": "bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/1/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.4 Genders
+Endpoint: GET https://pokeapi.co/api/v2/gender/{id or name}/
+Description: Gender differences for species breeding and variations.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "female",
+  "pokemon_species_details": [
+    {
+      "rate": 1,
+      "pokemon_species": {
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon-species/1/"
+      }
+    }
+  ],
+  "required_for_evolution": [
+    {
+      "name": "wormadam",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/413/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.5 Growth Rates
+Endpoint: GET https://pokeapi.co/api/v2/growth-rate/{id or name}/
+Description: Growth rates determine how much experience a Pokémon needs to level up.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "slow",
+  "formula": "\\frac{5x^3}{4}",
+  "descriptions": [
+    {
+      "description": "slow",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "experience": 0
+    }
+  ],
+  "pokemon_species": [
+    {
+      "name": "growlithe",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/58/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.6 Natures
+Endpoint: GET https://pokeapi.co/api/v2/nature/{id or name}/
+Description: Natures influence how a Pokémon's stats grow.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "hardy",
+  "decreased_stat": null,
+  "increased_stat": null,
+  "hates_flavor": null,
+  "likes_flavor": null,
+  "pokeathlon_stat_changes": [
+    {
+      "max_change": 0,
+      "pokeathlon_stat": {
+        "name": "speed",
+        "url": "https://pokeapi.co/api/v2/pokeathlon-stat/1/"
+      }
+    }
+  ],
+  "names": [
+    {
+      "name": "Hardy",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.7 Pokeathlon Stats
+Endpoint: GET https://pokeapi.co/api/v2/pokeathlon-stat/{id or name}/
+Description: Pokeathlon stats define performance parameters in Pokéathlon mini-games.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "speed",
+  "names": [
+    {
+      "name": "Speed",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "affecting_natures": {
+    "increase": [],
+    "decrease": []
+  }
+}
+
+--------------------------------------------------------------------------------
+
+3.8 Pokemon
+Endpoint: GET https://pokeapi.co/api/v2/pokemon/{id or name}/
+Description: Main Pokémon details including stats, moves, types, and sprites.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "bulbasaur",
+  "base_experience": 64,
+  "height": 7,
+  "is_default": true,
+  "order": 1,
+  "weight": 69,
+  "abilities": [
+    {
+      "is_hidden": false,
+      "slot": 1,
+      "ability": {
+        "name": "overgrow",
+        "url": "https://pokeapi.co/api/v2/ability/65/"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "name": "bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon-form/1/"
+    }
+  ],
+  "game_indices": [],
+  "held_items": [],
+  "location_area_encounters": "https://pokeapi.co/api/v2/pokemon/1/encounters",
+  "moves": [],
+  "species": {
+    "name": "bulbasaur",
+    "url": "https://pokeapi.co/api/v2/pokemon-species/1/"
+  },
+  "sprites": {
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+  },
+  "stats": [
+    {
+      "base_stat": 45,
+      "effort": 0,
+      "stat": {
+        "name": "hp",
+        "url": "https://pokeapi.co/api/v2/stat/1/"
+      }
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.9 Pokemon Location Encounters
+Endpoint: GET https://pokeapi.co/api/v2/pokemon/{id or name}/encounters
+Description: Lists of areas where a specific Pokémon can be encountered in the wild.
+
+Sample Response:
+[
+  {
+    "location_area": {
+      "name": "cerulean-city-area",
+      "url": "https://pokeapi.co/api/v2/location-area/281/"
+    },
+    "version_details": [
+      {
+        "encounter_details": [
+          {
+            "chance": 100,
+            "condition_values": [],
+            "max_level": 10,
+            "min_level": 10,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            }
+          }
+        ],
+        "max_chance": 100,
+        "version": {
+          "name": "yellow",
+          "url": "https://pokeapi.co/api/v2/version/3/"
+        }
+      }
+    ]
+  }
+]
+
+--------------------------------------------------------------------------------
+
+3.10 Pokemon Colors
+Endpoint: GET https://pokeapi.co/api/v2/pokemon-color/{id or name}/
+Description: Colors used for filtering Pokémon in the Pokédex.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "black",
+  "names": [
+    {
+      "name": "Black",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pokemon_species": [
+    {
+      "name": "snorlax",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/143/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.11 Pokemon Forms
+Endpoint: GET https://pokeapi.co/api/v2/pokemon-form/{id or name}/
+Description: Forms represent different variations of a Pokémon species (e.g., Mega evolutions, regional variants).
+
+Sample Response:
+{
+  "id": 1,
+  "name": "bulbasaur",
+  "order": 1,
+  "form_order": 1,
+  "is_default": true,
+  "is_battle_only": false,
+  "is_mega": false,
+  "form_name": "",
+  "pokemon": {
+    "name": "bulbasaur",
+    "url": "https://pokeapi.co/api/v2/pokemon/1/"
+  },
+  "sprites": {
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+  },
+  "types": [
+    {
+      "slot": 1,
+      "type": {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.12 Pokemon Habitats
+Endpoint: GET https://pokeapi.co/api/v2/pokemon-habitat/{id or name}/
+Description: Habitats are the general areas where Pokémon can be found.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "cave",
+  "names": [
+    {
+      "name": "cave",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pokemon_species": [
+    {
+      "name": "zubat",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/41/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.13 Pokemon Shapes
+Endpoint: GET https://pokeapi.co/api/v2/pokemon-shape/{id or name}/
+Description: Shapes used for sorting and categorizing Pokémon in the Pokédex.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "ball",
+  "awesome_names": [
+    {
+      "awesome_name": "Pomaceous",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "names": [
+    {
+      "name": "Ball",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ],
+  "pokemon_species": [
+    {
+      "name": "voltorb",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/100/"
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.14 Pokemon Species
+Endpoint: GET https://pokeapi.co/api/v2/pokemon-species/{id or name}/
+Description: Species resource containing evolutionary chain references, flavor text, gender ratios, etc.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "bulbasaur",
+  "order": 1,
+  "gender_rate": 1,
+  "capture_rate": 45,
+  "base_happiness": 70,
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "hatch_counter": 20,
+  "has_gender_differences": false,
+  "forms_switchable": false,
+  "growth_rate": {
+    "name": "medium-slow",
+    "url": "https://pokeapi.co/api/v2/growth-rate/4/"
+  },
+  "pokedex_numbers": [
+    {
+      "entry_number": 1,
+      "pokedex": {
+        "name": "national",
+        "url": "https://pokeapi.co/api/v2/pokedex/1/"
+      }
+    }
+  ],
+  "egg_groups": [
+    {
+      "name": "monster",
+      "url": "https://pokeapi.co/api/v2/egg-group/1/"
+    }
+  ],
+  "color": {
+    "name": "green",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/5/"
+  },
+  "shape": {
+    "name": "quadruped",
+    "url": "https://pokeapi.co/api/v2/pokemon-shape/8/"
+  },
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/1/"
+  }
+}
+
+--------------------------------------------------------------------------------
+
+3.15 Stats
+Endpoint: GET https://pokeapi.co/api/v2/stat/{id or name}/
+Description: Base stats such as HP, Attack, Defense, Special-Attack, Special-Defense, and Speed.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "hp",
+  "game_index": 1,
+  "is_battle_only": false,
+  "affecting_moves": {
+    "increase": [],
+    "decrease": []
+  },
+  "affecting_natures": {
+    "increase": [],
+    "decrease": []
+  },
+  "characteristics": [
+    {
+      "url": "https://pokeapi.co/api/v2/characteristic/1/"
+    }
+  ],
+  "move_damage_class": null,
+  "names": [
+    {
+      "name": "HP",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+
+3.16 Types
+Endpoint: GET https://pokeapi.co/api/v2/type/{id or name}/
+Description: Elemental types like Fire, Water, Grass, Electric, etc., including damage relations.
+
+Sample Response:
+{
+  "id": 1,
+  "name": "normal",
+  "damage_relations": {
+    "no_damage_to": [
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      }
+    ],
+    "double_damage_to": [],
+    "no_damage_from": [
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      }
+    ],
+    "half_damage_from": [],
+    "double_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      }
+    ]
+  },
+  "pokemon": [
+    {
+      "slot": 1,
+      "pokemon": {
+        "name": "pidgey",
+        "url": "https://pokeapi.co/api/v2/pokemon/16/"
+      }
+    }
+  ]
+}
