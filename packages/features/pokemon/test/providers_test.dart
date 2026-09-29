@@ -7,8 +7,8 @@ import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dar
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// A repository fake that returns pages driven by [offset] so we can exercise
-/// pagination (loadMore) and refresh flows deterministically.
+/// A repository fake that returns pages driven by the request offset so we can
+/// exercise pagination (loadMore) and refresh flows deterministically.
 class _PagingRepo implements PokemonRepository {
   int listCalls = 0;
 
