@@ -9,6 +9,5 @@ class GetBerry implements UseCaseWithParams<BerryDetail, String> {
   final BerryRepository _repository;
 
   @override
-  ResultFuture<BerryDetail> call(String params) =>
-      _repository.getBerry(params);
+  ResultFuture<BerryDetail> call(String params) => _repository.getBerry(params);
 }

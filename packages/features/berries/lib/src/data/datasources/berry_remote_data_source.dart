@@ -4,9 +4,7 @@ import 'package:feature_berries/src/data/models/berry_model.dart';
 import 'package:network/network.dart';
 
 abstract interface class BerryRemoteDataSource {
-  Future<
-    ({int count, String? next, String? previous, List<BerryModel> items})
-  >
+  Future<({int count, String? next, String? previous, List<BerryModel> items})>
   fetchBerryList({required int offset, required int limit});
 
   Future<BerryDetailModel> fetchBerry(String name);
@@ -18,9 +16,7 @@ class BerryRemoteDataSourceImpl implements BerryRemoteDataSource {
   final ApiClient _client;
 
   @override
-  Future<
-    ({int count, String? next, String? previous, List<BerryModel> items})
-  >
+  Future<({int count, String? next, String? previous, List<BerryModel> items})>
   fetchBerryList({required int offset, required int limit}) async {
     final json = await _client.get<DataMap>(
       'berry',
