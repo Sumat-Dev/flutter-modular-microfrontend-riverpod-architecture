@@ -1,15 +1,24 @@
+import 'package:feature_pokemon/pokemon_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pokemon_app/config/routes/app_pages.dart';
-import 'package:pokemon_app/config/routes/app_routes.dart';
+import 'package:pokemon_app/config/routes/app_module.dart';
 
 void main() {
-  test('AppPages exposes a GoRouter starting at the home route', () {
-    expect(AppPages.router, isA<GoRouter>());
-    expect(AppPages.initial, Routes.home);
+  test('AppModule declares the home route and mounts the Pokemon module', () {
+    final manager = RouteManager();
+    AppModule().routes(manager);
+
+    final names = manager.allRoutes.map((r) => r.name).toList();
+    expect(names, contains('/'));
+    expect(names, contains('/pokemon'));
   });
 
-  test('Routes builds the detail path from a name', () {
-    expect(Routes.pokemonDetail('pikachu'), '/pokemon/pikachu');
+  test('PokemonModule exposes the list and detail routes', () {
+    final manager = RouteManager();
+    PokemonModule().routes(manager);
+
+    final names = manager.allRoutes.map((r) => r.name).toList();
+    expect(names, contains('/'));
+    expect(names, contains('/:name'));
   });
 }

@@ -5,9 +5,6 @@ import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
 import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 
-/// Implements [PokemonRepository]. Applies the cache strategy from plan §11
-/// (cache hit → entity; miss → remote → save → entity) and maps data-layer
-/// exceptions to domain failures per §12.
 class PokemonRepositoryImpl implements PokemonRepository {
   const PokemonRepositoryImpl({
     required PokemonRemoteDataSource remote,

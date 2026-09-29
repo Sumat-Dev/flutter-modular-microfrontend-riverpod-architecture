@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:feature_pokemon/feature_pokemon.dart';
+import 'package:feature_pokemon/pokemon_module.dart';
 import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_list_provider.dart';
 import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
@@ -36,6 +36,9 @@ void main() {
       overrides: [pokemonRepositoryProvider.overrideWithValue(_FakeRepo())],
     );
     addTearDown(container.dispose);
+    // Keep the provider mounted while its async build runs. Under Riverpod 3.x
+    // an unlistened provider read via `.future` may be disposed mid-build.
+    container.listen(pokemonListProvider, (_, _) {});
 
     final state = await container.read(pokemonListProvider.future);
     expect(state.items.single.name, 'bulbasaur');
@@ -50,9 +53,14 @@ void main() {
     );
     addTearDown(container.dispose);
 
-    await expectLater(
-      container.read(pokemonListProvider.future),
-      throwsA(isA<NetworkFailure>()),
-    );
+    // In Riverpod 3.x, `provider.future` skips intermediate error states, so we
+    // assert on the AsyncValue itself: the build's thrown domain Failure must
+    // surface as an AsyncError carrying the NetworkFailure.
+    final sub = container.listen(pokemonListProvider, (_, _) {});
+    await container.pump();
+
+    final state = sub.read();
+    expect(state.hasError, isTrue);
+    expect(state.error, isA<NetworkFailure>());
   });
 }

@@ -1,7 +1,6 @@
 import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Displays a single base stat as a labelled progress bar.
 class PokemonStatView extends StatelessWidget {
   const PokemonStatView({required this.stat, super.key});
 

@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 
-/// Full Pokemon detail entity used on the detail page.
 class PokemonDetail extends Equatable {
   const PokemonDetail({
     required this.id,
@@ -28,7 +27,6 @@ class PokemonDetail extends Equatable {
   List<Object?> get props => [id, name, height, weight, types, stats];
 }
 
-/// A single base stat (e.g. hp, attack).
 class PokemonStat extends Equatable {
   const PokemonStat({required this.name, required this.baseValue});
 

@@ -1,7 +1,6 @@
 import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// List tile / card for a single Pokemon in the list.
 class PokemonCard extends StatelessWidget {
   const PokemonCard({required this.pokemon, required this.onTap, super.key});
 

@@ -1,8 +1,5 @@
 import 'package:core/core.dart';
 
-/// Presentation-layer helper that turns a domain [Failure] into a message the
-/// user can read. Keeping this in presentation avoids leaking UI strings into
-/// the domain.
 String failureToMessage(Object error) {
   if (error is Failure) {
     return switch (error) {

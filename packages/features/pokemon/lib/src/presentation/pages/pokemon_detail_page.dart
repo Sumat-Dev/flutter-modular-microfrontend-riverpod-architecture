@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ui_components/ui_components.dart';
 
-/// Detail page for a single Pokemon, resolved by [name].
 class PokemonDetailPage extends ConsumerWidget {
   const PokemonDetailPage({required this.name, super.key});
 

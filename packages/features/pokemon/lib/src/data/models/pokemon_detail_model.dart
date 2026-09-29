@@ -4,11 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon_detail_model.g.dart';
 
-/// DTO for `/pokemon/{name}`.
-///
-/// The PokeAPI wire format nests type/stat names, so the nested fields use
-/// custom [JsonKey] converters. The same shape is used for the local cache
-/// round-trip, so `fromJson`/`toJson` are symmetric.
 @JsonSerializable(explicitToJson: true)
 class PokemonDetailModel {
   const PokemonDetailModel({
@@ -28,7 +23,6 @@ class PokemonDetailModel {
   final int height;
   final int weight;
 
-  /// PokeAPI encodes types as `[{"type": {"name": "electric"}}]`.
   @JsonKey(fromJson: _typesFromJson, toJson: _typesToJson)
   final List<String> types;
 
@@ -59,7 +53,6 @@ class PokemonDetailModel {
       .toList();
 }
 
-/// DTO for a single stat entry: `{"base_stat": 35, "stat": {"name": "hp"}}`.
 @JsonSerializable()
 class PokemonStatModel {
   const PokemonStatModel({required this.name, required this.baseValue});
