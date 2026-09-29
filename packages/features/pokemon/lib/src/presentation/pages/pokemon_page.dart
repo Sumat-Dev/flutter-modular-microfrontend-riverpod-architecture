@@ -66,8 +66,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
                 final pokemon = data.items[index];
                 return PokemonCard(
                   pokemon: pokemon,
-                  onTap: () =>
-                      Modular.to.pushNamed('/pokemon/${pokemon.name}'),
+                  onTap: () => Modular.to.pushNamed('/pokemon/${pokemon.name}'),
                 );
               },
             ),
