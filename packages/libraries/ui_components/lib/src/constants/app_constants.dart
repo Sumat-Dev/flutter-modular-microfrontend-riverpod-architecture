@@ -1,3 +1,5 @@
+/// Shared design-system constants: colour tokens, fonts, asset paths and
+/// common layout metrics reused across features.
 library;
 
 import 'package:material_ui/material_ui.dart';
@@ -5,5 +7,8 @@ import 'package:material_ui/material_ui.dart';
 part 'app_colors.dart';
 part 'assets_path.dart';
 
-const kBorderRadius = 10.0;
-const kSpacing = 20.0;
+/// Default corner radius (logical pixels) for cards, buttons and sheets.
+const double kBorderRadius = 12;
+
+/// Default spacing unit (logical pixels) for padding and gaps.
+const double kSpacing = 24;

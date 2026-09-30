@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:ui_components/src/constants/app_constants.dart';
 
 /// A vertically scrolling, infinitely-paginated list with pull-to-refresh and a
 /// trailing progress indicator while the next page loads.
@@ -84,7 +85,7 @@ class _AppPaginatedListViewState<T> extends State<AppPaginatedListView<T>> {
         itemBuilder: (context, index) {
           if (index >= widget.items.length) {
             return const Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(kSpacing / 2),
               child: Center(child: CircularProgressIndicator.adaptive()),
             );
           }
