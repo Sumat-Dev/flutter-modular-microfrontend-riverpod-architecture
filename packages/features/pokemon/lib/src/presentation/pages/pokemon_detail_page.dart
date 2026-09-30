@@ -1,5 +1,6 @@
 import 'package:feature_pokemon/src/presentation/providers/pokemon_detail_provider.dart';
 import 'package:feature_pokemon/src/presentation/utils/failure_message.dart';
+import 'package:feature_pokemon/src/presentation/widgets/pokemon_encounters_view.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_stat_view.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_type_chip.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,6 +57,8 @@ class PokemonDetailPage extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               for (final stat in pokemon.stats) PokemonStatView(stat: stat),
+              const SizedBox(height: 16),
+              PokemonEncountersView(name: name),
             ],
           ),
         ),

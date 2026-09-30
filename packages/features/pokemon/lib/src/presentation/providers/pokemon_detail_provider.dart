@@ -10,6 +10,8 @@ Future<PokemonDetail> pokemonDetail(Ref ref, String name) async {
   final result = await useCase(name);
   // Deliberately rethrow the domain Failure so Riverpod surfaces it via
   // AsyncValue.error.
+  // Rethrow the domain Failure so Riverpod surfaces it via
+  // AsyncValue.error.
   // ignore: only_throw_errors
   return result.fold((f) => throw f, (detail) => detail);
 }

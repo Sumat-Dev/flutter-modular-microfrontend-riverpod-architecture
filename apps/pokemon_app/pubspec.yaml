@@ -14,6 +14,7 @@ dependencies:
   core: any
   cupertino_icons: ^1.0.8
   feature_berries: any
+  feature_items: any
   feature_pokemon: any
   flutter:
     sdk: flutter

@@ -13,6 +13,7 @@ workspace:
   - packages/libraries/localization
   - packages/features/pokemon
   - packages/features/berries
+  - packages/features/items
 
 dev_dependencies:
   melos: ^8.0.0
