@@ -4,7 +4,8 @@ import 'package:ui_components/ui_components.dart';
 /// Centralised light/dark theming for the app shell.
 ///
 /// Mirrors the reference `AppTheme` (system mode + light/dark [ThemeData]) and
-/// sources the shared [Font] family from the `ui_components` constants library.
+/// sources the shared [Font] family and [AppColors] tokens from the
+/// `ui_components` constants library.
 class AppTheme {
   AppTheme._();
 
@@ -15,19 +16,19 @@ class AppTheme {
     fontFamily: Font.poppins,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFFFFFFFF),
-      secondary: Color(0xFFEFF0F6),
+      primary: AppColors.lightPrimary,
+      secondary: AppColors.lightSecondary,
     ),
-    scaffoldBackgroundColor: const Color(0xFFF6F7FC),
+    scaffoldBackgroundColor: AppColors.lightBackground,
   );
 
   static ThemeData get darkTheme => ThemeData(
     fontFamily: Font.poppins,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
-      primary: Color(0xFF1C243F),
-      secondary: Color(0xFF262F4B),
+      primary: AppColors.darkPrimary,
+      secondary: AppColors.darkSecondary,
     ),
-    scaffoldBackgroundColor: const Color(0xFF0F172F),
+    scaffoldBackgroundColor: AppColors.darkBackground,
   );
 }

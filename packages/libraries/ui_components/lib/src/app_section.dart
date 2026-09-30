@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:ui_components/src/app_chip.dart';
+import 'package:ui_components/src/constants/app_constants.dart';
 
 /// A titled section header (`titleMedium`) preceded by vertical spacing.
 ///
@@ -9,8 +10,8 @@ class AppSectionHeader extends StatelessWidget {
   const AppSectionHeader({
     required this.title,
     super.key,
-    this.topSpacing = 16,
-    this.bottomSpacing = 8,
+    this.topSpacing = kSpacing,
+    this.bottomSpacing = kSpacing / 2,
   });
 
   /// The section title.

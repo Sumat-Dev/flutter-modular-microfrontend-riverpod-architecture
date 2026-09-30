@@ -1,20 +1,27 @@
 part of 'app_constants.dart';
 
-class Font {
-  static const poppins = 'Poppins';
+/// Font family names bundled with the design system.
+abstract final class Font {
+  static const String poppins = 'Poppins';
 }
 
-class ImageAnimationPath {
-  static const _folderPath = 'assets/images/animation';
-  static const mockAnimation = '$_folderPath/mock-animation.json';
+/// Paths to Lottie/animation assets.
+abstract final class ImageAnimationPath {
+  static const String _folder = 'assets/images/animation';
+
+  static const String mock = '$_folder/mock-animation.json';
 }
 
-class ImageRasterPath {
-  static const _folderPath = 'assets/images/raster';
-  static const mockImage = '$_folderPath/mock-image.png';
+/// Paths to raster image assets (PNG/JPG).
+abstract final class ImageRasterPath {
+  static const String _folder = 'assets/images/raster';
+
+  static const String mock = '$_folder/mock-image.png';
 }
 
-class ImageVectorPath {
-  static const _folderPath = 'assets/images/vector';
-  static const mockImage = '$_folderPath/mock-image.svg';
+/// Paths to vector image assets (SVG).
+abstract final class ImageVectorPath {
+  static const String _folder = 'assets/images/vector';
+
+  static const String mock = '$_folder/mock-image.svg';
 }
