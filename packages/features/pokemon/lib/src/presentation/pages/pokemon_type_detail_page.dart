@@ -15,13 +15,13 @@ class PokemonTypeDetailPage extends ConsumerWidget {
     final detail = ref.watch(pokemonTypeDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(pokemonTypeDetailProvider(idOrName)),
-        ),
-        data: (type) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(pokemonTypeDetailProvider(idOrName)),
+        dataBuilder: (context, type) {
           final theme = Theme.of(context);
           final relations = type.damageRelations;
           return SingleChildScrollView(
@@ -39,18 +39,10 @@ class PokemonTypeDetailPage extends ConsumerWidget {
                   Text('Generation: ${type.generation!.name}'),
                 if (type.moveDamageClass != null)
                   Text('Damage class: ${type.moveDamageClass!.name}'),
-                _section(
-                  theme,
-                  'Double damage to',
-                  relations.doubleDamageTo,
-                ),
-                _section(
-                  theme,
-                  'Double damage from',
-                  relations.doubleDamageFrom,
-                ),
-                _section(theme, 'No damage to', relations.noDamageTo),
-                _section(theme, 'Half damage to', relations.halfDamageTo),
+                ..._section('Double damage to', relations.doubleDamageTo),
+                ..._section('Double damage from', relations.doubleDamageFrom),
+                ..._section('No damage to', relations.noDamageTo),
+                ..._section('Half damage to', relations.halfDamageTo),
               ],
             ),
           );
@@ -59,26 +51,11 @@ class PokemonTypeDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _section(
-    ThemeData theme,
-    String title,
-    List<NamedApiResource> items,
-  ) {
-    if (items.isEmpty) return const SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        Text(title, style: theme.textTheme.titleMedium),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 4,
-          children: [
-            for (final i in items) Chip(label: Text(i.name)),
-          ],
-        ),
-      ],
-    );
+  List<Widget> _section(String title, List<NamedApiResource> items) {
+    if (items.isEmpty) return const [];
+    return [
+      AppSectionHeader(title: title),
+      AppChipWrap(labels: [for (final i in items) i.name]),
+    ];
   }
 }

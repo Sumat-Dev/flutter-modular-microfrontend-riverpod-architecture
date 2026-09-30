@@ -14,13 +14,13 @@ class PokemonShapeDetailPage extends ConsumerWidget {
     final detail = ref.watch(pokemonShapeDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(pokemonShapeDetailProvider(idOrName)),
-        ),
-        data: (shape) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(pokemonShapeDetailProvider(idOrName)),
+        dataBuilder: (context, shape) {
           final theme = Theme.of(context);
           final species = shape.pokemonSpecies.take(30).toList();
           return SingleChildScrollView(
@@ -35,15 +35,9 @@ class PokemonShapeDetailPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text('#${shape.id}'),
                 if (species.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Species', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final s in species) Chip(label: Text(s.name)),
-                    ],
+                  const AppSectionHeader(title: 'Species'),
+                  AppChipWrap(
+                    labels: [for (final s in species) s.name],
                   ),
                 ],
               ],

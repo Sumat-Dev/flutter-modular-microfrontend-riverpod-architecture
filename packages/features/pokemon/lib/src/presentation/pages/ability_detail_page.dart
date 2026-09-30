@@ -14,13 +14,13 @@ class AbilityDetailPage extends ConsumerWidget {
     final detail = ref.watch(abilityDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(abilityDetailProvider(idOrName)),
-        ),
-        data: (ability) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(abilityDetailProvider(idOrName)),
+        dataBuilder: (context, ability) {
           final theme = Theme.of(context);
           final pokemon = ability.pokemon.take(30).toList();
           return SingleChildScrollView(
@@ -46,16 +46,9 @@ class AbilityDetailPage extends ConsumerWidget {
                   Text(ability.effect!),
                 ],
                 if (pokemon.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Pokémon', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final p in pokemon)
-                        Chip(label: Text(p.pokemon.name)),
-                    ],
+                  const AppSectionHeader(title: 'Pokémon'),
+                  AppChipWrap(
+                    labels: [for (final p in pokemon) p.pokemon.name],
                   ),
                 ],
               ],

@@ -4,10 +4,10 @@ import 'package:feature_pokemon/src/domain/repositories/pokemon_repository.dart'
 import 'package:feature_pokemon/src/presentation/providers/pokemon_providers.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_stat_view.dart';
-import 'package:feature_pokemon/src/presentation/widgets/pokemon_type_chip.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:ui_components/ui_components.dart';
 
 /// Repository fake that lets each test control the outcomes and timing.
 class _FakeRepo implements PokemonRepository {
@@ -87,7 +87,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('#25'), findsOneWidget);
-      expect(find.byType(PokemonTypeChip), findsOneWidget);
+      expect(find.byType(AppChip), findsOneWidget);
       expect(find.byType(PokemonStatView), findsOneWidget);
       expect(find.textContaining('Height: 4'), findsOneWidget);
     });

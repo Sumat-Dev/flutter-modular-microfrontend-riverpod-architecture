@@ -14,13 +14,13 @@ class PokemonSpeciesDetailPage extends ConsumerWidget {
     final detail = ref.watch(pokemonSpeciesDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(pokemonSpeciesDetailProvider(idOrName)),
-        ),
-        data: (species) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(pokemonSpeciesDetailProvider(idOrName)),
+        dataBuilder: (context, species) {
           final theme = Theme.of(context);
           final eggGroups = species.eggGroups;
           return SingleChildScrollView(
@@ -67,15 +67,9 @@ class PokemonSpeciesDetailPage extends ConsumerWidget {
                   Text(species.flavorText!),
                 ],
                 if (eggGroups.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Egg groups', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final g in eggGroups) Chip(label: Text(g.name)),
-                    ],
+                  const AppSectionHeader(title: 'Egg groups'),
+                  AppChipWrap(
+                    labels: [for (final g in eggGroups) g.name],
                   ),
                 ],
               ],

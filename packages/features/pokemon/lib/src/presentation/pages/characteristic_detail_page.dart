@@ -14,13 +14,13 @@ class CharacteristicDetailPage extends ConsumerWidget {
     final detail = ref.watch(characteristicDetailProvider(id));
     return Scaffold(
       appBar: AppBar(title: Text('#$id')),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(characteristicDetailProvider(id)),
-        ),
-        data: (characteristic) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(characteristicDetailProvider(id)),
+        dataBuilder: (context, characteristic) {
           final values = characteristic.possibleValues.join(', ');
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),

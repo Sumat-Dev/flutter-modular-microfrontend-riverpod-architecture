@@ -14,13 +14,13 @@ class PokemonFormDetailPage extends ConsumerWidget {
     final detail = ref.watch(pokemonFormDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(pokemonFormDetailProvider(idOrName)),
-        ),
-        data: (form) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(pokemonFormDetailProvider(idOrName)),
+        dataBuilder: (context, form) {
           final theme = Theme.of(context);
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
@@ -48,16 +48,8 @@ class PokemonFormDetailPage extends ConsumerWidget {
                 if (form.pokemon != null)
                   Text('Pokémon: ${form.pokemon!.name}'),
                 if (form.types.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Types', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final t in form.types) Chip(label: Text(t)),
-                    ],
-                  ),
+                  const AppSectionHeader(title: 'Types'),
+                  AppChipWrap(labels: form.types),
                 ],
               ],
             ),

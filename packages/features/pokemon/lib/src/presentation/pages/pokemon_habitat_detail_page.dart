@@ -14,13 +14,13 @@ class PokemonHabitatDetailPage extends ConsumerWidget {
     final detail = ref.watch(pokemonHabitatDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(pokemonHabitatDetailProvider(idOrName)),
-        ),
-        data: (habitat) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(pokemonHabitatDetailProvider(idOrName)),
+        dataBuilder: (context, habitat) {
           final theme = Theme.of(context);
           final species = habitat.pokemonSpecies.take(30).toList();
           return SingleChildScrollView(
@@ -35,15 +35,9 @@ class PokemonHabitatDetailPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text('#${habitat.id}'),
                 if (species.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Species', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final s in species) Chip(label: Text(s.name)),
-                    ],
+                  const AppSectionHeader(title: 'Species'),
+                  AppChipWrap(
+                    labels: [for (final s in species) s.name],
                   ),
                 ],
               ],
