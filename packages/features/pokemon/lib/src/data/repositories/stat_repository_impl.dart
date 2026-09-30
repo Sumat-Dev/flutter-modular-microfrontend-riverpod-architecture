@@ -22,16 +22,9 @@ class StatRepositoryImpl implements StatRepository {
         return Left(UnexpectedFailure(message: 'Parse stat failed: $e'));
       }
     } on AppException catch (e) {
-      return Left(_mapException(e));
+      return Left(Failure.fromException(e));
     } on Object catch (e) {
       return Left(UnexpectedFailure(message: '$e'));
     }
   }
-
-  Failure _mapException(AppException e) => switch (e) {
-    NetworkException() => NetworkFailure.fromException(e),
-    ServerException() => ServerFailure.fromException(e),
-    CacheException() => CacheFailure.fromException(e),
-    ParsingException() => UnexpectedFailure(message: e.message),
-  };
 }

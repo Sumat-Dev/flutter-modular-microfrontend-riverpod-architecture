@@ -8,7 +8,6 @@ workspace:
   - apps/pokemon_app
   - packages/libraries/core
   - packages/libraries/network
-  - packages/libraries/storage
   - packages/libraries/ui_components
   - packages/libraries/localization
   - packages/features/pokemon

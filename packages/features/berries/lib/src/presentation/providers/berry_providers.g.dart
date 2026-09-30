@@ -50,47 +50,6 @@ final class ApiClientProvider
 
 String _$apiClientHash() => r'5d833c536c59b343477ab74e766896cdbdcf15c7';
 
-@ProviderFor(keyValueStore)
-const keyValueStoreProvider = KeyValueStoreProvider._();
-
-final class KeyValueStoreProvider
-    extends $FunctionalProvider<KeyValueStore, KeyValueStore, KeyValueStore>
-    with $Provider<KeyValueStore> {
-  const KeyValueStoreProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'keyValueStoreProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$keyValueStoreHash();
-
-  @$internal
-  @override
-  $ProviderElement<KeyValueStore> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  KeyValueStore create(Ref ref) {
-    return keyValueStore(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(KeyValueStore value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<KeyValueStore>(value),
-    );
-  }
-}
-
-String _$keyValueStoreHash() => r'cda52d16188a68d8b40135477b1b1f16a7ddc0c1';
-
 @ProviderFor(berryRemoteDataSource)
 const berryRemoteDataSourceProvider = BerryRemoteDataSourceProvider._();
 
@@ -139,54 +98,6 @@ final class BerryRemoteDataSourceProvider
 String _$berryRemoteDataSourceHash() =>
     r'd8b09af82d072c65e55a13bf6d142314d46b4f9a';
 
-@ProviderFor(berryLocalDataSource)
-const berryLocalDataSourceProvider = BerryLocalDataSourceProvider._();
-
-final class BerryLocalDataSourceProvider
-    extends
-        $FunctionalProvider<
-          BerryLocalDataSource,
-          BerryLocalDataSource,
-          BerryLocalDataSource
-        >
-    with $Provider<BerryLocalDataSource> {
-  const BerryLocalDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'berryLocalDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$berryLocalDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<BerryLocalDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  BerryLocalDataSource create(Ref ref) {
-    return berryLocalDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(BerryLocalDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<BerryLocalDataSource>(value),
-    );
-  }
-}
-
-String _$berryLocalDataSourceHash() =>
-    r'd1bb09519991cd3539a9530b3250696a41acf72b';
-
 @ProviderFor(berryRepository)
 const berryRepositoryProvider = BerryRepositoryProvider._();
 
@@ -227,7 +138,7 @@ final class BerryRepositoryProvider
   }
 }
 
-String _$berryRepositoryHash() => r'bd5a3764ee1029cf02c80e44ac556c1d51e01035';
+String _$berryRepositoryHash() => r'083d5635f86a038ee83dc972aec7178e9cc09338';
 
 @ProviderFor(getBerryList)
 const getBerryListProvider = GetBerryListProvider._();

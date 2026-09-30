@@ -9,8 +9,32 @@ import 'package:equatable/equatable.dart';
 sealed class Failure extends Equatable {
   const Failure({required this.message, this.statusCode});
 
+  /// Maps a data-layer [AppException] to its domain-safe [Failure] counterpart.
+  ///
+  /// This is the single source of truth for exception→failure translation:
+  /// every repository should funnel caught [AppException]s through here instead
+  /// of hand-rolling an identical `switch`.
+  factory Failure.fromException(AppException exception) => switch (exception) {
+    NetworkException() => NetworkFailure.fromException(exception),
+    ServerException() => ServerFailure.fromException(exception),
+    CacheException() => CacheFailure.fromException(exception),
+    ParsingException() => UnexpectedFailure(message: exception.message),
+  };
+
   final String message;
   final int? statusCode;
+
+  /// A short, user-facing, presentation-agnostic description of this failure.
+  ///
+  /// Kept here (rather than duplicated per feature) so every microfrontend
+  /// surfaces consistent copy. Presentation layers may still localise or
+  /// override these strings if needed.
+  String get userMessage => switch (this) {
+    NetworkFailure() => 'No internet connection. Please try again.',
+    ServerFailure() => 'The server is unavailable right now.',
+    CacheFailure() => 'Could not read local data.',
+    UnexpectedFailure() => 'Something went wrong.',
+  };
 
   @override
   List<Object?> get props => [message, statusCode];

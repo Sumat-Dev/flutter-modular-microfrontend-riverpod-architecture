@@ -547,7 +547,8 @@ void main() {
   });
 
   group('resource repository error mapping', () {
-    // Each repository duplicates the same _mapException switch + parse-failure
+    // Each repository maps errors with a try/catch that routes known
+    // AppExceptions through Failure.fromException, plus a local parse-failure
     // path. These drive Network/Cache exceptions and a malformed payload
     // through every repo to cover those arms.
     test('NatureRepositoryImpl maps Cache/Network/parse', () async {
