@@ -73,3 +73,35 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: Sumat-Dev/flutter-modular-microfrontend-riverpod-architecture
+
+  SonarQube:
+    name: SonarQube
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          # Shallow clones should be disabled for a better relevancy of analysis.
+          fetch-depth: 0
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2.23.0
+        with:
+          channel: stable
+          cache: true
+
+      - name: Resolve workspace dependencies
+        run: flutter pub get
+
+      # The analysis requires coverage reports to be generated first. Each
+      # package emits <package>/coverage/lcov.info, consumed via
+      # sonar.dart.lcov.reportPaths in sonar-project.properties.
+      - name: Run tests with coverage
+        run: dart run melos run test:coverage
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@7006c4492b2e0ee0f816d36501671557c97f5995 # v8.1.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
