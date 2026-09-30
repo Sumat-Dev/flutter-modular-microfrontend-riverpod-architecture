@@ -14,13 +14,13 @@ class StatDetailPage extends ConsumerWidget {
     final detail = ref.watch(statDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(statDetailProvider(idOrName)),
-        ),
-        data: (stat) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(statDetailProvider(idOrName)),
+        dataBuilder: (context, stat) {
           final theme = Theme.of(context);
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),

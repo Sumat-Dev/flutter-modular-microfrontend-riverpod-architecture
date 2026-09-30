@@ -14,13 +14,13 @@ class NatureDetailPage extends ConsumerWidget {
     final detail = ref.watch(natureDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(natureDetailProvider(idOrName)),
-        ),
-        data: (nature) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(natureDetailProvider(idOrName)),
+        dataBuilder: (context, nature) {
           final theme = Theme.of(context);
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),

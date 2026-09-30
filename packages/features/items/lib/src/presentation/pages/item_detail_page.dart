@@ -1,6 +1,5 @@
 import 'package:feature_items/src/presentation/providers/item_detail_provider.dart';
 import 'package:feature_items/src/presentation/utils/failure_message.dart';
-import 'package:feature_items/src/presentation/widgets/item_attribute_chip.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ui_components/ui_components.dart';
@@ -15,13 +14,13 @@ class ItemDetailPage extends ConsumerWidget {
     final detail = ref.watch(itemDetailProvider(name));
     return Scaffold(
       appBar: AppBar(title: Text(name)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(itemDetailProvider(name)),
-        ),
-        data: (item) => SingleChildScrollView(
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(itemDetailProvider(name)),
+        dataBuilder: (context, item) => SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,36 +39,20 @@ class ItemDetailPage extends ConsumerWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                children: [
-                  Chip(label: Text('category: ${item.category}')),
-                  Chip(label: Text('cost: ${item.cost}')),
-                  if (item.flingPower != null)
-                    Chip(label: Text('fling: ${item.flingPower}')),
+              AppChipWrap(
+                labels: [
+                  'category: ${item.category}',
+                  'cost: ${item.cost}',
+                  if (item.flingPower != null) 'fling: ${item.flingPower}',
                 ],
               ),
               if (item.effect.isNotEmpty) ...[
-                const SizedBox(height: 16),
-                Text('Effect', style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 8),
+                const AppSectionHeader(title: 'Effect'),
                 Text(item.effect),
               ],
               if (item.attributes.isNotEmpty) ...[
-                const SizedBox(height: 16),
-                Text(
-                  'Attributes',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    for (final attribute in item.attributes)
-                      ItemAttributeChip(attribute: attribute),
-                  ],
-                ),
+                const AppSectionHeader(title: 'Attributes'),
+                AppChipWrap(runSpacing: 8, labels: item.attributes),
               ],
             ],
           ),

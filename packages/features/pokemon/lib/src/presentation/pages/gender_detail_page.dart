@@ -14,13 +14,13 @@ class GenderDetailPage extends ConsumerWidget {
     final detail = ref.watch(genderDetailProvider(idOrName));
     return Scaffold(
       appBar: AppBar(title: Text(idOrName)),
-      body: detail.when(
-        loading: () => const AppLoadingView(),
-        error: (error, _) => AppErrorView(
-          message: failureToMessage(error),
-          onRetry: () => ref.invalidate(genderDetailProvider(idOrName)),
-        ),
-        data: (gender) {
+      body: AppAsyncView(
+        isLoading: detail.isLoading,
+        hasError: detail.hasError,
+        data: detail.value,
+        errorMessage: detail.hasError ? failureToMessage(detail.error!) : null,
+        onRetry: () => ref.invalidate(genderDetailProvider(idOrName)),
+        dataBuilder: (context, gender) {
           final theme = Theme.of(context);
           final details = gender.pokemonSpeciesDetails.take(30).toList();
           final required = gender.requiredForEvolution;
@@ -33,27 +33,16 @@ class GenderDetailPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text('#${gender.id}'),
                 if (details.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text('Species', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
+                  const AppSectionHeader(title: 'Species'),
                   for (final d in details)
                     Text(
                       '${d.pokemonSpecies.name} (rate ${d.rate})',
                     ),
                 ],
                 if (required.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text(
-                    'Required for evolution',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      for (final r in required) Chip(label: Text(r.name)),
-                    ],
+                  const AppSectionHeader(title: 'Required for evolution'),
+                  AppChipWrap(
+                    labels: [for (final r in required) r.name],
                   ),
                 ],
               ],

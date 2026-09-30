@@ -2,7 +2,6 @@ import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:feature_pokemon/src/domain/entities/pokemon_detail.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_card.dart';
 import 'package:feature_pokemon/src/presentation/widgets/pokemon_stat_view.dart';
-import 'package:feature_pokemon/src/presentation/widgets/pokemon_type_chip.dart';
 import 'package:flutter_test/flutter_test.dart';
 // Use the same Material implementation the widgets use so the widget types
 // (Chip/ListTile/LinearProgressIndicator/Material) match in finders.
@@ -11,14 +10,6 @@ import 'package:material_ui/material_ui.dart';
 Widget _wrap(Widget child) => MaterialApp(home: Scaffold(body: child));
 
 void main() {
-  group('PokemonTypeChip', () {
-    testWidgets('renders the type label', (tester) async {
-      await tester.pumpWidget(_wrap(const PokemonTypeChip(type: 'electric')));
-      expect(find.text('electric'), findsOneWidget);
-      expect(find.byType(Chip), findsOneWidget);
-    });
-  });
-
   group('PokemonStatView', () {
     testWidgets('renders name, value and clamped progress', (tester) async {
       await tester.pumpWidget(

@@ -1,5 +1,6 @@
 import 'package:feature_pokemon/src/domain/entities/pokemon.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:ui_components/ui_components.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({required this.pokemon, required this.onTap, super.key});
@@ -9,20 +10,14 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: ListTile(
-        leading: Image.network(
-          pokemon.imageUrl,
-          width: 48,
-          height: 48,
-          errorBuilder: (_, _, _) => const Icon(Icons.catching_pokemon),
-        ),
-        title: Text(pokemon.name),
-        subtitle: Text('#${pokemon.id}'),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: onTap,
+    return AppEntityCard(
+      leading: AppNetworkThumbnail(
+        imageUrl: pokemon.imageUrl,
+        fallbackIcon: Icons.catching_pokemon,
       ),
+      title: pokemon.name,
+      subtitle: '#${pokemon.id}',
+      onTap: onTap,
     );
   }
 }
