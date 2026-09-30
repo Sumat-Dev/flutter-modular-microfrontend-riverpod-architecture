@@ -50,47 +50,6 @@ final class ApiClientProvider
 
 String _$apiClientHash() => r'5d833c536c59b343477ab74e766896cdbdcf15c7';
 
-@ProviderFor(keyValueStore)
-const keyValueStoreProvider = KeyValueStoreProvider._();
-
-final class KeyValueStoreProvider
-    extends $FunctionalProvider<KeyValueStore, KeyValueStore, KeyValueStore>
-    with $Provider<KeyValueStore> {
-  const KeyValueStoreProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'keyValueStoreProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$keyValueStoreHash();
-
-  @$internal
-  @override
-  $ProviderElement<KeyValueStore> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  KeyValueStore create(Ref ref) {
-    return keyValueStore(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(KeyValueStore value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<KeyValueStore>(value),
-    );
-  }
-}
-
-String _$keyValueStoreHash() => r'cda52d16188a68d8b40135477b1b1f16a7ddc0c1';
-
 @ProviderFor(itemRemoteDataSource)
 const itemRemoteDataSourceProvider = ItemRemoteDataSourceProvider._();
 
@@ -139,54 +98,6 @@ final class ItemRemoteDataSourceProvider
 String _$itemRemoteDataSourceHash() =>
     r'fd289605137a82cd7ad817952a6c74cb20c284e5';
 
-@ProviderFor(itemLocalDataSource)
-const itemLocalDataSourceProvider = ItemLocalDataSourceProvider._();
-
-final class ItemLocalDataSourceProvider
-    extends
-        $FunctionalProvider<
-          ItemLocalDataSource,
-          ItemLocalDataSource,
-          ItemLocalDataSource
-        >
-    with $Provider<ItemLocalDataSource> {
-  const ItemLocalDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'itemLocalDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$itemLocalDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<ItemLocalDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  ItemLocalDataSource create(Ref ref) {
-    return itemLocalDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ItemLocalDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<ItemLocalDataSource>(value),
-    );
-  }
-}
-
-String _$itemLocalDataSourceHash() =>
-    r'711bb160d6b8ec2d12806e554425d100ddb7c7c1';
-
 @ProviderFor(itemRepository)
 const itemRepositoryProvider = ItemRepositoryProvider._();
 
@@ -226,7 +137,7 @@ final class ItemRepositoryProvider
   }
 }
 
-String _$itemRepositoryHash() => r'81d915386ef731783e2201d81dcbd7982c013c40';
+String _$itemRepositoryHash() => r'd761040fd910b9ae12b3b93ef323050dc6733b9c';
 
 @ProviderFor(getItemList)
 const getItemListProvider = GetItemListProvider._();

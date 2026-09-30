@@ -50,47 +50,6 @@ final class ApiClientProvider
 
 String _$apiClientHash() => r'5d833c536c59b343477ab74e766896cdbdcf15c7';
 
-@ProviderFor(keyValueStore)
-const keyValueStoreProvider = KeyValueStoreProvider._();
-
-final class KeyValueStoreProvider
-    extends $FunctionalProvider<KeyValueStore, KeyValueStore, KeyValueStore>
-    with $Provider<KeyValueStore> {
-  const KeyValueStoreProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'keyValueStoreProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$keyValueStoreHash();
-
-  @$internal
-  @override
-  $ProviderElement<KeyValueStore> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  KeyValueStore create(Ref ref) {
-    return keyValueStore(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(KeyValueStore value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<KeyValueStore>(value),
-    );
-  }
-}
-
-String _$keyValueStoreHash() => r'cda52d16188a68d8b40135477b1b1f16a7ddc0c1';
-
 @ProviderFor(pokemonRemoteDataSource)
 const pokemonRemoteDataSourceProvider = PokemonRemoteDataSourceProvider._();
 
@@ -139,54 +98,6 @@ final class PokemonRemoteDataSourceProvider
 String _$pokemonRemoteDataSourceHash() =>
     r'2f88adca07a15480e7d667cd962c5975d135bb2d';
 
-@ProviderFor(pokemonLocalDataSource)
-const pokemonLocalDataSourceProvider = PokemonLocalDataSourceProvider._();
-
-final class PokemonLocalDataSourceProvider
-    extends
-        $FunctionalProvider<
-          PokemonLocalDataSource,
-          PokemonLocalDataSource,
-          PokemonLocalDataSource
-        >
-    with $Provider<PokemonLocalDataSource> {
-  const PokemonLocalDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'pokemonLocalDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$pokemonLocalDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<PokemonLocalDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  PokemonLocalDataSource create(Ref ref) {
-    return pokemonLocalDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(PokemonLocalDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<PokemonLocalDataSource>(value),
-    );
-  }
-}
-
-String _$pokemonLocalDataSourceHash() =>
-    r'a1115a22ca7c7862db87ebc1f40d3299637f1f65';
-
 @ProviderFor(pokemonRepository)
 const pokemonRepositoryProvider = PokemonRepositoryProvider._();
 
@@ -232,7 +143,7 @@ final class PokemonRepositoryProvider
   }
 }
 
-String _$pokemonRepositoryHash() => r'37bd358bac6369274902f30b783d077fd76042b1';
+String _$pokemonRepositoryHash() => r'c5dcdd223aa25ac017154208bd02a59590d8c121';
 
 @ProviderFor(getPokemonList)
 const getPokemonListProvider = GetPokemonListProvider._();
