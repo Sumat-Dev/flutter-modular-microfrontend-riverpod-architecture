@@ -19,8 +19,18 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             FilledButton(
+              onPressed: () => Modular.to.navigate('/pokemon/resources'),
+              child: const Text('Pokémon Resources'),
+            ),
+            const SizedBox(height: 16),
+            FilledButton(
               onPressed: () => Modular.to.navigate('/berries'),
               child: const Text('Open Berries'),
+            ),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => Modular.to.navigate('/items'),
+              child: const Text('Open Items'),
             ),
           ],
         ),
