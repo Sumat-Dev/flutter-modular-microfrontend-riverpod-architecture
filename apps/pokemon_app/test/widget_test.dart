@@ -4,13 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pokemon_app/config/routes/app_module.dart';
 
 void main() {
-  test('AppModule declares the home route and mounts the Pokemon module', () {
+  test('AppModule nests the feature modules under the home shell', () {
     final manager = RouteManager();
     AppModule().routes(manager);
 
     final names = manager.allRoutes.map((r) => r.name).toList();
-    expect(names, contains('/'));
-    expect(names, contains('/pokemon'));
+    expect(names, ['/']);
+
+    // The feature modules hang off the shell so they render inside its
+    // RouterOutlet while the bottom navigation bar stays on screen.
+    final children = manager.allRoutes.single.children.map((r) => r.name);
+    expect(children, ['/pokemon', '/berries', '/items']);
   });
 
   test('PokemonModule exposes the list and detail routes', () {
